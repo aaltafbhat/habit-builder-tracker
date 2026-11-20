@@ -1,0 +1,11 @@
+{
+  "appId": "com.gstinfusion.habitbuilder",
+  "appName": "Habit Builder Tracker",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

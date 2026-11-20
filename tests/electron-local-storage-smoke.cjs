@@ -1,0 +1,13 @@
+'use strict';
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const main = fs.readFileSync(path.join(root, 'packaging/electron/main.cjs'), 'utf8');
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const assert = (condition, message) => { if (!condition) throw new Error(message); };
+assert(pkg.main === 'packaging/electron/main.cjs', 'Electron entry point mismatch');
+assert(main.includes("require('electron')") && main.includes("'../../www/index.html'"), 'Electron does not load the packaged local app shell');
+assert(main.includes('contextIsolation: true') && main.includes('nodeIntegration: false') && main.includes('sandbox: true'), 'Electron security preferences missing');
+assert(!main.includes('ipcMain') && !main.includes('workspace-repository') && !main.includes('HBTNativeWorkspaceStorage'), 'Native shared-folder IPC still exists');
+assert(!fs.existsSync(path.join(root, 'packaging/electron/preload.cjs')), 'Shared-folder preload bridge still exists');
+console.log('PASS Electron local-storage smoke: sandboxed renderer loads the local IndexedDB app; no shared-folder IPC bridge.');

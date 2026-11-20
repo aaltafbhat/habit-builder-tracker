@@ -1,0 +1,180 @@
+/* Habit Builder Tracker v1.5.30 — Header Visual Style Integration */
+.app-header {
+    position: relative;
+    isolation: isolate;
+    transition: background 240ms cubic-bezier(.2,.75,.25,1),
+                border-color 240ms cubic-bezier(.2,.75,.25,1),
+                box-shadow 240ms cubic-bezier(.2,.75,.25,1),
+                backdrop-filter 240ms cubic-bezier(.2,.75,.25,1);
+}
+.app-header h1 { color: var(--text, #24164f); transition: color 200ms ease; }
+.app-header p { color: var(--text-secondary, #777b8c); }
+.header-profile-actions { display:flex; flex-direction:column; align-items:flex-end; gap:5px; position:relative; z-index:5; }
+.header-profile-primary-actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; }
+.header-notification-wrap { position:relative; }
+.header-notification-button,
+.header-appearance-text-link {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    min-height:42px; padding:9px 14px; border:1px solid var(--border, #dfe2ec);
+    border-radius:14px; background:var(--surface, #fff); color:var(--text, #24164f);
+    font-family:inherit; font-size:12px; font-weight:600; line-height:1.2; text-decoration:none; cursor:pointer;
+    transition: transform 220ms cubic-bezier(.2,.75,.25,1),
+                background 220ms ease, border-color 220ms ease,
+                box-shadow 220ms ease, color 220ms ease;
+}
+.header-notification-button { width:42px; padding:9px; position:relative; }
+.header-notification-button svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.header-appearance-text-link { min-width:112px; }
+.header-notification-button:hover,
+.header-appearance-text-link:hover { transform:translateY(-2px); border-color:var(--primary, #6540d8); box-shadow:0 7px 18px rgba(39,35,82,.10); }
+.header-notification-button:active,
+.header-appearance-text-link:active { transform:translateY(0) scale(.98); }
+.header-notification-button:focus-visible,
+.header-appearance-text-link:focus-visible,
+.header-signout-link:focus-visible { outline:3px solid color-mix(in srgb, var(--primary, #6540d8) 35%, transparent); outline-offset:3px; }
+.header-signout-link { margin:0 5px 0 0; padding:4px 9px; border:1px solid transparent; border-radius:8px; background:transparent; color:var(--danger, #dc4352); font-family:inherit; font-size:11px; font-weight:600; line-height:1.25; text-decoration:none; cursor:pointer; transition:background 180ms ease,border-color 180ms ease,transform 180ms ease; }
+.header-signout-link:hover { background:var(--danger-light, #fff0f1); border-color:color-mix(in srgb, var(--danger, #dc4352) 28%, transparent); transform:translateY(-1px); }
+.header-signout-link[hidden], .header-notification-panel[hidden] { display:none !important; }
+.header-notification-panel {
+    position:absolute; top:calc(100% + 12px); right:0; z-index:1200;
+    width:min(360px, calc(100vw - 28px)); max-height:min(520px, calc(100vh - 110px));
+    overflow:auto; border:1px solid var(--border, #dfe2ec); border-radius:18px;
+    background:var(--surface, #fff); color:var(--text, #24164f);
+    box-shadow:0 18px 48px rgba(26,24,58,.18);
+    transform-origin:top right; animation:headerPanelIn 180ms cubic-bezier(.2,.75,.25,1) both;
+}
+.header-notification-panel-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:15px 17px; border-bottom:1px solid var(--border, #dfe2ec); }
+.header-notification-panel-heading strong { display:block; color:var(--text, #24164f); font-size:13px; }
+.header-notification-panel-heading small { display:block; margin-top:3px; color:var(--text-secondary, #777b8c); font-size:11px; }
+.header-notification-close { width:28px; height:28px; display:grid; place-items:center; border:0; border-radius:8px; background:transparent; color:var(--text-secondary, #777b8c); cursor:pointer; font-size:18px; }
+.header-notification-close:hover { background:var(--primary-light, #f0ecff); color:var(--primary, #6540d8); }
+.header-notification-content { padding:16px; }
+.header-notification-empty { min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:8px; color:var(--text-secondary, #777b8c); }
+.header-notification-empty-icon { width:44px; height:44px; border-radius:50%; display:grid; place-items:center; background:var(--primary-light, #f0ecff); color:var(--primary, #6540d8); }
+.header-notification-empty-icon svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.7; }
+.header-notification-empty strong { color:var(--text, #24164f); font-size:12px; }
+.header-notification-empty p { margin:0; color:var(--text-secondary, #777b8c); font-size:11px; }
+.header-focus-notification { display:flex; align-items:center; gap:11px; padding:13px; border:1px solid var(--border, #dfe2ec); border-radius:13px; background:var(--background, #f5f6fa); }
+.header-focus-notification-icon { width:36px; height:36px; border-radius:11px; display:grid; place-items:center; flex:0 0 auto; background:var(--primary-light, #f0ecff); color:var(--primary, #6540d8); }
+.header-focus-notification-icon svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.header-focus-notification-copy { min-width:0; flex:1; }
+.header-focus-notification-copy strong,.header-focus-notification-copy small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.header-focus-notification-copy strong { color:var(--text, #24164f); font-size:12px; }
+.header-focus-notification-copy small { margin-top:3px; color:var(--text-secondary, #777b8c); font-size:10px; }
+.header-focus-notification-time { color:var(--primary, #6540d8); font-weight:800; font-size:15px; font-variant-numeric:tabular-nums; }
+.header-focus-notification-status { margin:9px 2px 11px; color:var(--text-secondary, #777b8c); font-size:10px; }
+.header-focus-open { width:100%; min-height:34px; border:1px solid var(--border, #dfe2ec); border-radius:9px; background:var(--surface, #fff); color:var(--text, #24164f); font-size:11px; font-weight:700; cursor:pointer; }
+.header-focus-open:hover { border-color:var(--primary, #6540d8); color:var(--primary, #6540d8); }
+@keyframes headerPanelIn { from { opacity:0; transform:translateY(-5px) scale(.985); } to { opacity:1; transform:translateY(0) scale(1); } }
+
+/* 1 — Neumorphism / Soft UI */
+:root[data-visual-style="soft-ui"] .app-header {
+    background:var(--surface, #eef0f6); border-bottom-color:transparent;
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,.45), 8px 8px 22px rgba(38,43,72,.08), -7px -7px 20px rgba(255,255,255,.72);
+}
+:root[data-visual-style="soft-ui"] .header-notification-button,
+:root[data-visual-style="soft-ui"] .header-appearance-text-link,
+:root[data-visual-style="soft-ui"] .header-notification-panel { border-color:transparent; box-shadow:5px 5px 12px rgba(40,45,75,.12), -5px -5px 12px rgba(255,255,255,.78); }
+:root[data-visual-style="soft-ui"] .header-notification-button:hover,
+:root[data-visual-style="soft-ui"] .header-appearance-text-link:hover { box-shadow:inset 3px 3px 7px rgba(40,45,75,.10), inset -3px -3px 7px rgba(255,255,255,.7); }
+
+/* 2 — Claymorphism */
+:root[data-visual-style="claymorphism"] .app-header { background:linear-gradient(130deg, color-mix(in srgb,var(--primary-light,#eee9ff) 62%,var(--surface,#fff)), var(--surface,#fff) 72%); border-bottom-color:color-mix(in srgb,var(--primary,#6540d8) 12%,var(--border,#ddd)); box-shadow:0 10px 25px rgba(76,58,126,.11); border-radius:0 0 20px 20px; }
+:root[data-visual-style="claymorphism"] .header-notification-button,
+:root[data-visual-style="claymorphism"] .header-appearance-text-link { border:1px solid rgba(255,255,255,.85); border-radius:15px; box-shadow:0 5px 0 color-mix(in srgb,var(--primary,#6540d8) 12%,var(--border,#ddd)), 0 9px 18px rgba(66,53,105,.10); }
+:root[data-visual-style="claymorphism"] .header-notification-panel { border-radius:21px; border-color:rgba(255,255,255,.8); box-shadow:0 18px 42px rgba(72,59,118,.17); }
+
+/* 3 — Skeuomorphism */
+:root[data-visual-style="skeuomorphism"] .app-header { background:linear-gradient(180deg, color-mix(in srgb,var(--surface,#fff) 95%,white), color-mix(in srgb,var(--surface,#fff) 87%,#7b8196)); border-top:1px solid rgba(255,255,255,.9); border-bottom:1px solid color-mix(in srgb,var(--border,#ddd) 65%,#73798d); box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 4px 9px rgba(23,29,57,.11); }
+:root[data-visual-style="skeuomorphism"] .header-notification-button,
+:root[data-visual-style="skeuomorphism"] .header-appearance-text-link { background:linear-gradient(180deg,var(--surface,#fff),color-mix(in srgb,var(--surface,#fff) 86%,#8d91a2)); border:1px solid color-mix(in srgb,var(--border,#ddd) 75%,#7c8295); border-radius:9px; box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 2px 3px rgba(25,31,58,.16); }
+:root[data-visual-style="skeuomorphism"] .header-notification-button:active,
+:root[data-visual-style="skeuomorphism"] .header-appearance-text-link:active { box-shadow:inset 0 2px 4px rgba(20,25,50,.15); }
+
+/* 4 — Aurora UI */
+:root[data-visual-style="aurora"] .app-header { background:radial-gradient(ellipse at 88% -20%, color-mix(in srgb,var(--primary,#6540d8) 22%,transparent), transparent 48%), radial-gradient(ellipse at 58% 130%, rgba(60,205,190,.12), transparent 42%), var(--surface,#fff); border-bottom-color:color-mix(in srgb,var(--primary,#6540d8) 20%,var(--border,#ddd)); box-shadow:0 8px 24px rgba(72,62,130,.08); }
+:root[data-visual-style="aurora"] .header-notification-button,
+:root[data-visual-style="aurora"] .header-appearance-text-link { background:color-mix(in srgb,var(--surface,#fff) 78%,var(--primary-light,#eee9ff)); border-color:color-mix(in srgb,var(--primary,#6540d8) 20%,var(--border,#ddd)); box-shadow:0 5px 18px rgba(90,73,165,.12); }
+:root[data-visual-style="aurora"] .header-notification-panel { background:color-mix(in srgb,var(--surface,#fff) 94%,var(--primary-light,#eee9ff)); border-color:color-mix(in srgb,var(--primary,#6540d8) 22%,var(--border,#ddd)); }
+
+/* 5 — Flat Design 2.0 */
+:root[data-visual-style="flat-2"] .app-header { background:var(--surface,#fff); border-bottom:3px solid var(--primary-light,#eee9ff); box-shadow:0 4px 16px rgba(38,35,83,.055); }
+:root[data-visual-style="flat-2"] .header-notification-button,
+:root[data-visual-style="flat-2"] .header-appearance-text-link { background:var(--primary-light,#eee9ff); border-color:transparent; border-radius:11px; }
+:root[data-visual-style="flat-2"] .header-appearance-text-link { color:var(--primary,#6540d8); }
+:root[data-visual-style="flat-2"] .header-notification-panel { border-top:3px solid var(--primary,#6540d8); }
+
+/* 6 — Minimalism */
+:root[data-visual-style="minimal"] .app-header { background:var(--surface,#fff); border-bottom:1px solid var(--border,#e4e5eb); box-shadow:none; }
+:root[data-visual-style="minimal"] .header-notification-button,
+:root[data-visual-style="minimal"] .header-appearance-text-link { background:transparent; border-color:transparent; box-shadow:none; border-radius:8px; }
+:root[data-visual-style="minimal"] .header-notification-button:hover,
+:root[data-visual-style="minimal"] .header-appearance-text-link:hover { background:var(--background,#f5f6fa); box-shadow:none; }
+:root[data-visual-style="minimal"] .header-notification-panel { border-radius:10px; box-shadow:0 8px 26px rgba(25,28,50,.10); }
+
+/* 7 — Liquid Glass */
+:root[data-visual-style="liquid-glass"] .app-header { background:var(--surface,#fff); border-bottom:1px solid var(--border,#ddd); box-shadow:0 8px 30px rgba(30,35,70,.08); }
+@supports (backdrop-filter: blur(12px)) {
+    :root[data-visual-style="liquid-glass"] .app-header { background:color-mix(in srgb,var(--surface,#fff) 76%,transparent); backdrop-filter:blur(22px) saturate(165%); -webkit-backdrop-filter:blur(22px) saturate(165%); }
+    :root[data-visual-style="liquid-glass"] .header-notification-button,
+    :root[data-visual-style="liquid-glass"] .header-appearance-text-link,
+    :root[data-visual-style="liquid-glass"] .header-notification-panel { background:color-mix(in srgb,var(--surface,#fff) 72%,transparent); backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%); border-color:color-mix(in srgb,var(--border,#ddd) 55%,white); box-shadow:0 10px 30px rgba(35,38,78,.12), inset 0 1px 0 rgba(255,255,255,.55); }
+}
+:root[data-visual-style="liquid-glass"] .header-appearance-text-link { border-radius:999px; }
+:root[data-visual-style="liquid-glass"] .header-notification-button { border-radius:50%; }
+
+/* Keep contrast and interaction consistent in dark mode. */
+:root[data-theme="dark"] .app-header,
+:root[data-theme="dark"] .header-notification-panel,
+:root[data-theme="dark"] .header-notification-button,
+:root[data-theme="dark"] .header-appearance-text-link { color:var(--text); }
+:root[data-theme="dark"] .header-signout-link { color:var(--danger); }
+:root[data-theme="dark"] .header-focus-notification { background:color-mix(in srgb,var(--surface) 78%,black); }
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="system"] .app-header,
+    :root[data-theme="system"] .header-notification-panel,
+    :root[data-theme="system"] .header-notification-button,
+    :root[data-theme="system"] .header-appearance-text-link { color:var(--text); }
+}
+:root[data-theme="windows-classic"] .app-header { border-radius:0 !important; }
+:root[data-theme="windows-classic"] .header-notification-button,
+:root[data-theme="windows-classic"] .header-appearance-text-link,
+:root[data-theme="windows-classic"] .header-notification-panel { border-radius:4px !important; }
+
+@media (max-width: 700px) {
+    .app-header { gap:10px; }
+    .header-profile-primary-actions { gap:6px; }
+    .header-notification-button,.header-appearance-text-link { min-height:38px; }
+    .header-appearance-text-link { min-width:0; padding-inline:11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .app-header,.header-notification-button,.header-appearance-text-link,.header-signout-link,.header-notification-panel { transition:none !important; animation:none !important; }
+}
+:root.motion-disabled .app-header,
+:root.motion-disabled .header-notification-button,
+:root.motion-disabled .header-appearance-text-link,
+:root.motion-disabled .header-signout-link,
+:root.motion-disabled .header-notification-panel { transition:none !important; animation:none !important; }
+
+
+/* v1.5.31 — Remove the shared capsule around header actions.
+   Keep the bell and Appearance controls independently styled. */
+.header-profile-primary-actions,
+.header-profile-actions {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    padding: 0 !important;
+}
+.header-profile-primary-actions::before,
+.header-profile-primary-actions::after,
+.header-profile-actions::before,
+.header-profile-actions::after {
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}

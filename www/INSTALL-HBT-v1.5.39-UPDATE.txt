@@ -1,0 +1,15 @@
+HABIT BUILDER TRACKER v1.5.39 — UPDATE PATCH
+
+1. Back up each important workspace from Backup & Install before updating.
+2. Close the app.
+3. Extract this ZIP into the existing Habit Builder Tracker project root and overwrite matching files.
+4. Run: node apply-local-storage-stable.cjs
+5. Run: npm install
+6. Run: npm test
+7. Start the Windows app: npm run desktop:dev
+
+The cleanup helper removes the obsolete shared-folder repository module, style, Electron preload bridge, related tests/docs and generated www cache. The next build recreates www from the local-only app shell.
+
+Do NOT clear browser IndexedDB, site data, or Electron application data. Existing local profiles and encryption remain in place.
+
+Shared-folder storage and automatic cloud sync are intentionally excluded. Cross-device transfer uses portable backup files and Workspace Manager → Find & import workspaces.

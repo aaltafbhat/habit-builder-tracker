@@ -1,0 +1,20 @@
+HABIT BUILDER TRACKER v1.5.2 — FINAL POLISH RELEASE
+
+REPLIT / WEB UPDATE
+1. Back up your current Replit project and workspace data.
+2. Extract the update ZIP at the project root, preserving the js/ and css/ folders.
+3. Replace matching files and add js/notes-vault.js.
+4. Restart the app and hard-refresh with Ctrl + Shift + R.
+5. Do not clear browser site data or IndexedDB.
+
+NEW FEATURES
+- Automatic Backup is under Backup & Install.
+- Windows 8 Classic is available under Profile & Appearance > Color theme.
+- Notes & Ideas offers color-coded priorities and workspace-local storage.
+- Password Vault stores encrypted credential records. Create a strong separate vault passphrase and keep it safe.
+
+BACKUP / RESTORE
+Notes and the encrypted vault payload are part of the workspace profile data and are included in normal workspace backups. Vault credentials remain encrypted in the backup. A restore requires the vault passphrase to unlock the credentials.
+
+BUILD
+Install dependencies with npm install. Use npm run desktop:win for the Windows installer build. Use npm run android:init once to create the Android project, then npm run android:sync and configure Android signing before producing a release APK.

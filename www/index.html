@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f5f9">
+    <meta name="description" content="Habit Builder Tracker by GST Infusion: an offline-first personal productivity system for habits, tasks, focus, notes and secure workspace backups.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Habit Builder Tracker">
+
+    <title>Habit Builder Tracker | GST Infusion</title>
+
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/visual-header-themes.css">
+    <link rel="stylesheet" href="css/header-signout.css">
+    <link rel="stylesheet" href="css/workspace-reset.css">
+    <link rel="stylesheet" href="css/workspace-import.css">	
+    <style id="hbt-v1-5-28-focus-preferences-polish">
+        /* Keep Session lengths as one clean panel; remove the nested rounded sub-card. */
+        .focus-duration-panel .focus-custom-settings.profile-focus-durations {
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 12px 0 0 !important;
+            max-width: none;
+        }
+        .focus-duration-panel .profile-focus-durations .focus-duration-fields,
+        .focus-duration-panel .profile-focus-durations .focus-duration-actions {
+            border-radius: 0;
+            box-shadow: none;
+        }
+        @media (max-width: 620px) {
+            .focus-duration-panel .focus-custom-settings.profile-focus-durations {
+                margin-top: 10px !important;
+            }
+        }
+    </style>
+
+<style id="hbt-header-signout-visibility">
+#sidebar-signout-btn[hidden] { display: none !important; }
+</style>
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>HABIT BUILDER</h2>
+            <p>TRACKER</p>
+            <div class="sidebar-profile-switcher">
+                <span class="sidebar-profile-avatar" id="sidebar-profile-avatar" aria-hidden="true">P</span>
+                <span class="sidebar-profile-details">
+                    <small>ACTIVE WORKSPACE</small>
+                    <strong id="sidebar-profile-name">Your Profile</strong>
+                    <button type="button" id="open-profile-manager" class="sidebar-switch-profile" aria-label="Switch workspace">
+                        <span aria-hidden="true">⇄</span> Switch workspace
+                    </button>
+                </span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-heading">WORKSPACE</p>
+
+            <a href="#overview" class="nav-link active">
+                <span>▦</span> Overview
+            </a>
+
+            <a href="#daily-tracker" class="nav-link">
+                <span>☑</span> Daily Tracker
+            </a>
+
+            <a href="#habits" class="nav-link">
+                <span aria-hidden="true">✦</span> Discipline Builder
+            </a>
+
+            <a href="#focus-mode" class="nav-link">
+                <span aria-hidden="true">◷</span> Focus Mode
+            </a>
+
+            <p class="nav-heading">MANAGEMENT</p>
+
+            <a href="#milestones" class="nav-link">
+                <span>⚑</span> Milestones
+            </a>
+
+            <a href="#projects" class="nav-link">
+                <span>▣</span> Projects
+            </a>
+
+            <a href="#reports" class="nav-link">
+                <span>▤</span> Reports
+            </a>
+
+            <p class="nav-heading">PERSONAL TOOLS</p>
+
+            <a href="#notes" class="nav-link">
+                <span aria-hidden="true">✎</span> Notes &amp; Ideas
+            </a>
+
+            <a href="#password-vault" class="nav-link">
+                <span aria-hidden="true">▣</span> Password Vault
+            </a>
+
+            <p class="nav-heading">SETTINGS</p>
+
+            <a href="#profile-settings" class="nav-link">
+                <svg class="nav-appearance-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12 3.5a8.5 8.5 0 1 0 0 17h1.1a2.1 2.1 0 0 0 1.5-3.6 1.5 1.5 0 0 1 1.1-2.6h1.1A3.7 3.7 0 0 0 20.5 10c0-3.6-3.8-6.5-8.5-6.5Z"></path>
+                    <circle cx="7.8" cy="10" r="1"></circle>
+                    <circle cx="11.5" cy="7.2" r="1"></circle>
+                    <circle cx="15.5" cy="8.8" r="1"></circle>
+                </svg>
+                <span>Profile &amp; Appearance</span>
+            </a>
+
+            <a href="#data-tools" class="nav-link">
+                <span>⇧</span> Backup &amp; Install
+            </a>
+
+            <p class="nav-heading">INFORMATION</p>
+            <a href="#about-contact" class="nav-link">
+                <span aria-hidden="true">ⓘ</span> About &amp; Contact
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Personal Performance System</p>
+            <small>Version 1.5.39 — Local Storage Stable</small>
+        </div>
+
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+
+        <!-- HEADER -->
+        <header class="app-header">
+
+            <button
+                type="button"
+                class="mobile-menu-btn"
+                id="mobile-menu-btn"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <div class="header-info">
+                <h1 id="header-user-name">Your Name</h1>
+                <p id="header-subtitle">Your Personal Command Center</p>
+            </div>
+            <div class="header-profile-actions">
+                <div class="header-profile-primary-actions">
+                    <div class="header-notification-wrap">
+                        <button type="button" class="header-notification-button" id="header-notification-button" aria-label="Open notifications" aria-expanded="false" aria-controls="header-notification-panel" title="Notifications">
+                            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                                <path d="M10 21h4"></path>
+                            </svg>
+                            <span class="header-notification-dot" id="header-notification-dot" hidden></span>
+                        </button>
+                        <section class="header-notification-panel" id="header-notification-panel" role="dialog" aria-label="Notifications" hidden>
+                            <div class="header-notification-panel-heading">
+                                <div><strong>Notifications</strong><small>Updates from your workspace</small></div>
+                                <button type="button" class="header-notification-close" id="header-notification-close" aria-label="Close notifications">×</button>
+                            </div>
+                            <div class="header-notification-content" id="header-notification-content" aria-live="polite">
+                                <div class="header-notification-empty">
+                                    <span class="header-notification-empty-icon" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg>
+                                    </span>
+                                    <strong>You're all caught up</strong>
+                                    <p>New notifications will appear here.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <button type="button" class="header-appearance-text-link" id="open-profile-settings" aria-label="Open appearance settings" title="Appearance">
+                        Appearance
+                    </button>
+                </div>
+                <button type="button" id="sidebar-signout-btn" class="header-signout-link" aria-label="Sign out of the active workspace" title="Sign out" hidden>Sign out</button>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- FIRST-TIME SETUP -->
+            <section id="onboarding" class="setup-screen" hidden>
+
+                <div class="setup-card">
+
+                    <div class="setup-brand">
+                        <h1>HABIT BUILDER</h1>
+                        <p>TRACKER</p>
+                    </div>
+
+                    <div class="setup-content">
+
+                        <span class="setup-label">
+                            PERSONAL WORKSPACE SETUP
+                        </span>
+
+                        <h2>Welcome aboard!</h2>
+
+                        <p>
+                            Let's personalize your workspace.
+                            First, tell us what we should call you.
+                        </p>
+
+                        <form id="setup-form">
+
+                            <label for="user-name">Your name</label>
+
+                            <input
+                                type="text"
+                                id="user-name"
+                                placeholder="Enter your name"
+                                maxlength="50"
+                                autocomplete="given-name"
+                                required
+                            >
+
+                            <button type="submit">
+                                Create My Workspace →
+                            </button>
+
+                        </form>
+
+                        <small>
+                            Your profile is stored locally on this device.
+                        </small>
+
+                    </div>
+
+                    <footer class="setup-footer">
+                        Habit Builder Tracker · Offline Edition
+                    </footer>
+
+                </div>
+
+            </section>
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" hidden>
+
+                <!-- ======================================
+     PROFILE MANAGER — SINGLE WORKSPACE SCREEN
+====================================== -->
+<section id="profile-manager-screen" class="page-section profile-manager-screen" hidden>
+    <div class="page-heading">
+        <span class="section-eyebrow">WORKSPACE ACCESS</span>
+        <h2>Welcome to Habit Builder Tracker</h2>
+        <p>Create a new workspace or select an existing workspace to continue.</p>
+    </div>
+
+    <article class="content-card profile-manager-panel" id="profile-manager-panel">
+        <div class="pm-topbar">
+            <div>
+                <div class="settings-section-heading">
+                    <h3>Workspace Manager</h3>
+                    <p>Each workspace has its own tasks, habits, milestones, projects, settings and optional password protection.</p>
+                </div>
+            </div>
+            <div class="pm-top-actions">
+                <button type="button" class="secondary-btn" id="profile-back-btn">Back to Dashboard</button>
+                <button type="button" class="pm-danger-btn" id="profile-signout-btn">Sign Out</button>
+            </div>
+        </div>
+
+        <div id="profile-manager-status" class="pm-status" role="status" aria-live="polite"></div>
+
+        <div class="pm-active-card" id="profile-active-card">
+            <div class="pm-active-avatar" id="active-profile-avatar" aria-hidden="true">—</div>
+            <div class="pm-active-copy">
+                <span class="section-eyebrow">CURRENT SESSION</span>
+                <h3 id="active-profile-name">No workspace signed in</h3>
+                <small id="active-profile-id">Select a workspace to continue</small>
+            </div>
+            <span class="pm-session-state" id="profile-session-state">Signed out</span>
+        </div>
+
+        <section class="pm-entry-panel" id="profile-entry-panel" aria-label="Workspace options">
+            <div class="pm-entry-heading">
+                <span class="section-eyebrow">GET STARTED</span>
+                <h3>How would you like to continue?</h3>
+                <p>Create a new workspace or open one you have already created.</p>
+            </div>
+            <div class="pm-entry-actions">
+                <button type="button" class="pm-choice-card" id="profile-choice-create">
+                    <span class="pm-choice-icon" aria-hidden="true">＋</span>
+                    <span><strong>Create workspace</strong><small>Start fresh with a separate set of habits, tasks and goals.</small></span>
+                    <span class="pm-choice-arrow" aria-hidden="true">→</span>
+                </button>
+                <button type="button" class="pm-choice-card" id="profile-choice-select">
+                    <span class="pm-choice-icon" aria-hidden="true">▦</span>
+                    <span><strong>Select existing workspace</strong><small id="profile-choice-select-description">Choose from your saved workspaces.</small></span>
+                    <span class="pm-choice-arrow" aria-hidden="true">→</span>
+                </button>
+                <button type="button" class="pm-choice-card pm-import-choice-card" id="profile-choice-import">
+                    <span class="pm-choice-icon" aria-hidden="true">⇩</span>
+                    <span><strong>Import / Restore workspace</strong><small>Find workspace backups from another browser, device or backup folder.</small></span>
+                    <span class="pm-choice-arrow" aria-hidden="true">→</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="pm-section" id="profile-list-section" aria-labelledby="profile-list-heading" hidden>
+            <div class="pm-section-heading">
+                <div>
+                    <h4 id="profile-list-heading">Your Workspaces</h4>
+                    <p>Choose a workspace to open it, or rename and delete saved workspaces.</p>
+                </div>
+                <div class="pm-list-heading-actions">
+                    <span class="pm-count" id="profile-count">0 workspaces</span>
+                    <button type="button" class="secondary-btn" id="profile-show-import-btn">⇩ Import backup</button>
+                    <button type="button" class="primary-btn" id="profile-show-create-btn">＋ Create workspace</button>
+                </div>
+            </div>
+            <div id="profile-list" class="profile-manager-list" aria-live="polite">
+                <p class="empty-state">Loading workspaces…</p>
+            </div>
+            <div class="pm-form-actions pm-back-actions">
+                <button type="button" class="secondary-btn" id="profile-list-back-btn">Back to options</button>
+            </div>
+        </section>
+
+        <section class="pm-section pm-inline-panel pm-import-panel" id="profile-import-panel" hidden aria-labelledby="profile-import-heading">
+            <div class="pm-section-heading">
+                <div>
+                    <h4 id="profile-import-heading">Find &amp; import workspaces</h4>
+                    <p>Scan a backup folder or select backup files exported from another browser or device. Matching backups are listed below so you can choose which workspace to add.</p>
+                </div>
+            </div>
+            <div class="pm-import-explainer">
+                <strong>Why aren't my other browser profiles listed automatically?</strong>
+                <p>Browsers keep app data separately. Workspaces from Chrome, Edge, Firefox or another device must be transferred using a Habit Builder Tracker backup. This import creates a separate local workspace; it does not enable automatic cloud sync.</p>
+            </div>
+            <div class="pm-import-actions">
+                <button type="button" class="primary-btn" id="profile-import-scan-folder">Scan backup folder</button>
+                <button type="button" class="secondary-btn" id="profile-import-select-files">Choose backup files</button>
+                <input type="file" id="profile-import-file-input" accept=".json,.hbtbackup,application/json" multiple hidden>
+            </div>
+            <div id="profile-import-results" class="pm-import-results" aria-live="polite">
+                <p class="empty-state">No backup files scanned yet. Choose a backup folder or select one or more backup files.</p>
+            </div>
+            <p class="pm-import-security-note">Standard JSON backups can be imported as a new workspace. Encrypted backup files ask for their recovery passphrase. Password-protected workspace records retain their original workspace ID and still require the original workspace password when opened.</p>
+            <div class="pm-form-actions pm-back-actions">
+                <button type="button" class="secondary-btn" id="profile-import-back-btn">Back</button>
+            </div>
+        </section>
+
+        <section class="pm-section pm-inline-panel" id="profile-create-panel" hidden aria-labelledby="profile-create-heading">
+            <div class="pm-section-heading">
+                <div>
+                    <h4 id="profile-create-heading">Create a workspace</h4>
+                    <p>Give this workspace a name. Password protection is optional: set it now or add it later in Profile &amp; Appearance.</p>
+                </div>
+            </div>
+            <form id="profile-create-form" class="pm-form">
+                <div class="settings-field">
+                    <label for="new-profile-name">Workspace name</label>
+                    <input type="text" id="new-profile-name" maxlength="50" autocomplete="off" placeholder="e.g. Personal, Work, Business" required>
+                    <small>This name identifies the workspace when you switch between workspaces.</small>
+                </div>
+                <label class="pm-create-password-toggle" for="new-profile-password-enabled">
+                    <input type="checkbox" id="new-profile-password-enabled">
+                    <span><strong>Set a password now</strong><small>Optional. You can add one later in Profile &amp; Appearance.</small></span>
+                </label>
+                <div class="pm-create-password-fields" id="new-profile-password-options" hidden>
+                    <div class="settings-field">
+                        <label for="new-profile-password">Workspace password</label>
+                        <input type="password" id="new-profile-password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters">
+                    </div>
+                    <div class="settings-field">
+                        <label for="new-profile-password-confirm">Confirm workspace password</label>
+                        <input type="password" id="new-profile-password-confirm" autocomplete="new-password" minlength="8" placeholder="Repeat password">
+                    </div>
+                </div>
+                <div class="pm-form-actions">
+                    <button type="button" class="secondary-btn" id="profile-create-cancel-btn">Cancel</button>
+                    <button type="submit" class="primary-btn">Create workspace</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="pm-section pm-inline-panel" id="profile-edit-panel" hidden aria-labelledby="profile-edit-heading">
+            <div class="pm-section-heading">
+                <div>
+                    <h4 id="profile-edit-heading">Rename Workspace</h4>
+                    <p>Update the name shown in the workspace selector.</p>
+                </div>
+            </div>
+            <form id="profile-edit-form" class="pm-form">
+                <input type="hidden" id="edit-profile-id">
+                <div class="settings-field">
+                    <label for="edit-profile-name">Workspace Name</label>
+                    <input type="text" id="edit-profile-name" maxlength="50" required>
+                </div>
+                <div class="pm-form-actions">
+                    <button type="button" class="secondary-btn" id="profile-edit-cancel-btn">Cancel</button>
+                    <button type="submit" class="primary-btn">Save Changes</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="pm-section pm-inline-panel" id="profile-auth-panel" hidden aria-labelledby="profile-auth-heading">
+            <div class="pm-section-heading">
+                <div>
+                    <h4 id="profile-auth-heading">Unlock Workspace</h4>
+                    <p id="profile-auth-description">Enter the password to open this workspace.</p>
+                </div>
+            </div>
+            <form id="profile-auth-form" class="pm-form">
+                <div class="settings-field">
+                    <label for="profile-auth-password">Workspace Password</label>
+                    <input type="password" id="profile-auth-password" autocomplete="current-password" required>
+                </div>
+                <p id="profile-auth-error" class="pm-error" role="alert" aria-live="assertive"></p>
+                <div class="pm-form-actions">
+                    <button type="button" class="secondary-btn" id="profile-auth-cancel-btn">Cancel</button>
+                    <button type="submit" class="primary-btn">Unlock &amp; Open</button>
+                </div>
+            </form>
+        </section>
+
+        <p class="pm-footnote">Workspaces are stored locally in this browser. Password protection encrypts workspace data on this device; it does not sync between devices.</p>
+    </article>
+</section>
+
+
+
+                <!-- OVERVIEW -->
+                
+                <!-- PROFILE & APPEARANCE SETTINGS -->
+                <section id="profile-settings" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">PERSONAL WORKSPACE</span>
+                        <h2>Profile &amp; Appearance</h2>
+                        <p>Customize your identity and workspace. Settings are stored on this device.</p>
+                    </div>
+					
+
+
+                <div class="settings-layout">
+                    <div class="settings-left-stack">
+                        <article class="content-card settings-profile-card">
+                            <div class="settings-section-heading">
+                                <h3>Your Profile</h3>
+                                <p>These details personalize your workspace.</p>
+                            </div>
+                            <form id="profile-settings-form">
+                                <div class="profile-editor">
+                                    <div class="profile-avatar-large" id="profile-avatar-preview" aria-label="Profile photo preview">Y</div>
+                                    <div class="profile-photo-controls">
+                                        <label for="profile-photo">Profile photo</label>
+                                        <input type="file" id="profile-photo" accept="image/png,image/jpeg,image/webp">
+                                        <small>Optional JPG, PNG or WebP; maximum 2 MB. Stored locally.</small>
+                                        <button type="button" class="secondary-btn" id="remove-profile-photo">Remove photo</button>
+                                    </div>
+                                </div>
+                                <div class="settings-form-grid">
+                                    <div class="settings-field">
+                                        <label for="profile-display-name">Your name</label>
+                                        <input type="text" id="profile-display-name" maxlength="50" required placeholder="Your name">
+                                    </div>
+                                    <div class="settings-field">
+                                        <label for="profile-subtitle">Workspace subtitle</label>
+                                        <input type="text" id="profile-subtitle" maxlength="80" placeholder="Your personal workspace">
+                                    </div>
+                                    <div class="settings-field settings-field-full">
+                                        <label for="profile-goal">Personal goal</label>
+                                        <textarea id="profile-goal" rows="3" maxlength="240" placeholder="What are you working toward?"></textarea>
+                                    </div>
+                                </div>
+                                <div class="settings-actions"><button type="submit" class="primary-btn">Save Profile</button></div>
+                            </form>
+                    <article class="content-card pm-security-section" id="profile-password-section" hidden aria-labelledby="profile-password-heading">
+                        <div class="pm-section-heading">
+                            <div>
+                                <h3 id="profile-password-heading">Workspace Password &amp; Security</h3>
+                                <p id="profile-password-description">Password is optional. Set it here to encrypt this workspace after creation.</p>
+                            </div>
+                            <span class="pm-security-label" id="profile-password-state">Not protected</span>
+                        </div>
+                        <form id="profile-password-form" class="pm-form">
+                            <div class="settings-form-grid">
+                                <div class="settings-field settings-field-full" id="profile-current-password-wrap">
+                                    <label for="profile-current-password">Current password</label>
+                                    <input type="password" id="profile-current-password" autocomplete="current-password" placeholder="Enter current password">
+                                </div>
+                                <div class="settings-field">
+                                    <label for="profile-new-password">New password</label>
+                                    <input type="password" id="profile-new-password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="profile-confirm-new-password">Confirm new password</label>
+                                    <input type="password" id="profile-confirm-new-password" autocomplete="new-password" minlength="8" placeholder="Repeat password" required>
+                                </div>
+                            </div>
+                            <div class="pm-form-actions">
+                                <button type="button" class="pm-danger-outline-btn" id="profile-remove-password-btn">Remove password</button>
+                                <button type="submit" class="primary-btn" id="profile-save-password-btn">Add password</button>
+                            </div>
+                        </form>
+                    </article>
+                        </article>
+
+                        <article class="content-card workspace-security-info-card" aria-labelledby="workspace-security-info-heading">
+                            <div class="workspace-security-info-header">
+                                <span class="workspace-security-info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3.5 19 6v5.2c0 4.4-2.9 7.5-7 9.3-4.1-1.8-7-4.9-7-9.3V6l7-2.5Z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+                                <div>
+                                    <span class="workspace-security-eyebrow">WORKSPACE PROTECTION</span>
+                                    <h3 id="workspace-security-info-heading">Workspace Password &amp; Security</h3>
+                                    <p>Understand how password protection keeps this workspace private.</p>
+                                </div>
+                                <span class="workspace-security-scope">This workspace</span>
+                            </div>
+                            <div class="workspace-security-info-grid">
+                                <div class="workspace-security-info-item">
+                                    <strong>Local encryption</strong>
+                                    <p>When password protection is enabled, workspace records are encrypted on this device.</p>
+                                </div>
+                                <div class="workspace-security-info-item">
+                                    <strong>Password control</strong>
+                                    <p>Add, change or remove the workspace password from the security controls when available.</p>
+                                </div>
+                                <div class="workspace-security-info-item">
+                                    <strong>Backup protection</strong>
+                                    <p>Automatic backup and recovery options are managed separately in Backup &amp; Install.</p>
+                                </div>
+                            </div>
+                            <p class="workspace-security-info-footnote">Keep your workspace password safe. If you forget it, encrypted workspace data may not be recoverable.</p>
+                        </article>
+                    </div>
+
+                        <article class="content-card settings-appearance-card">
+                            <div class="settings-section-heading">
+                                <h3>Appearance</h3>
+                                <p>Choose a comfortable look for your workspace.</p>
+                            </div>
+                            <div class="settings-field">
+                                <label for="theme-choice">Color theme</label>
+                                <select id="theme-choice">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="system">Follow system</option>
+                                    <option value="windows-classic">Windows 8 Classic</option>
+                                </select>
+                                <small>Windows 8 Classic uses a flat, Metro-inspired desktop style with Segoe UI typography and clean square-edged surfaces. Your selection is saved locally on this device.</small>
+                            </div>
+                            <div class="visual-style-field">
+                                <div class="visual-style-heading">
+                                    <div>
+                                        <label>Visual style</label>
+                                        <p class="accent-description">Choose a design language for cards, controls, surfaces and interactions.</p>
+                                    </div>
+                                    <span class="visual-style-recommendation">Recommended: Flat 2.0</span>
+                                </div>
+                                <div class="visual-style-grid" id="visual-style-grid" role="group" aria-label="Choose visual style">
+                                    <button type="button" class="visual-style-card" data-visual-style="soft-ui" aria-pressed="false">
+                                        <span class="visual-style-art art-soft" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Neumorphism</strong><small>Soft UI · tactile layers</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card" data-visual-style="claymorphism" aria-pressed="false">
+                                        <span class="visual-style-art art-clay" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Claymorphism</strong><small>Soft, rounded depth</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card" data-visual-style="skeuomorphism" aria-pressed="false">
+                                        <span class="visual-style-art art-skeuo" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Skeuomorphism</strong><small>Layered, tactile surfaces</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card" data-visual-style="aurora" aria-pressed="false">
+                                        <span class="visual-style-art art-aurora" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Aurora UI</strong><small>Soft luminous gradients</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card selected" data-visual-style="flat-2" aria-pressed="true">
+                                        <span class="visual-style-art art-flat" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Flat Design 2.0</strong><small>Clean, clear elevation</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card" data-visual-style="minimal" aria-pressed="false">
+                                        <span class="visual-style-art art-minimal" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Minimalism</strong><small>Quiet, reduced surfaces</small></span>
+                                    </button>
+                                    <button type="button" class="visual-style-card" data-visual-style="liquid-glass" aria-pressed="false">
+                                        <span class="visual-style-art art-liquid-glass" aria-hidden="true"><i></i><b></b><em></em></span>
+                                        <span class="visual-style-copy"><strong>Liquid Glass</strong><small>Translucent layers · soft blur</small></span>
+                                    </button>
+                                </div>
+                                <small id="visual-style-status" class="visual-style-status" aria-live="polite">Flat Design 2.0 selected.</small>
+                            </div>
+                            <details class="accent-customizer">
+                                <summary>Customize accent color</summary>
+                                <div class="settings-field accent-settings-field">
+                                    <p class="accent-description">Change the color used for buttons, active navigation, progress bars and highlights.</p>
+                                    <div class="accent-palette" id="accent-palette" role="group" aria-label="Choose accent color">
+                                        <button type="button" class="accent-swatch" data-accent="#2563eb" aria-label="Blue" title="Blue"><span></span><small>Blue</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#7c3aed" aria-label="Violet" title="Violet"><span></span><small>Violet</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#059669" aria-label="Green" title="Green"><span></span><small>Green</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#0d9488" aria-label="Teal" title="Teal"><span></span><small>Teal</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#e11d48" aria-label="Rose" title="Rose"><span></span><small>Rose</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#ea580c" aria-label="Orange" title="Orange"><span></span><small>Orange</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#d97706" aria-label="Amber" title="Amber"><span></span><small>Amber</small></button>
+                                        <button type="button" class="accent-swatch" data-accent="#475569" aria-label="Slate" title="Slate"><span></span><small>Slate</small></button>
+                                    </div>
+                                    <div class="custom-accent-row">
+                                        <label for="custom-accent-color">Custom color</label>
+                                        <input type="color" id="custom-accent-color" value="#2563eb" aria-label="Choose a custom accent color">
+                                    </div>
+                                    <small id="accent-color-status" aria-live="polite">Blue is your default accent color.</small>
+                                </div>
+                            </details>
+                            <div class="settings-toggle-row visual-bento-toggle">
+                                <div><strong>Bento Grid dashboard</strong><p>Arrange overview cards in a balanced, editorial grid. Best on wider screens.</p></div>
+                                <label class="settings-switch" for="dashboard-bento-enabled"><input type="checkbox" id="dashboard-bento-enabled" checked><span class="settings-switch-track"></span></label>
+                            </div>
+                            <div class="settings-toggle-row">
+                                <div><strong>Interface animations</strong><p>Smooth button and card micro-interactions with staggered section entrances.</p></div>
+                                <label class="settings-switch" for="animations-enabled"><input type="checkbox" id="animations-enabled" checked><span class="settings-switch-track"></span></label>
+                            </div>
+                            <div class="settings-toggle-row">
+                                <div><strong>Reduce motion</strong><p>Minimize movement for a calmer experience.</p></div>
+                                <label class="settings-switch" for="reduce-motion"><input type="checkbox" id="reduce-motion"><span class="settings-switch-track"></span></label>
+                            </div>
+                            <p class="settings-note">Reduced motion takes priority over interface animations.</p>
+                            
+                        </article>
+                    
+                    </div>
+
+                    <article class="content-card focus-preferences-card" id="focus-preferences-card" aria-labelledby="focus-preferences-heading">
+    <div class="focus-preferences-settings">
+        <div class="focus-preferences-header">
+            <div class="settings-section-heading">
+                <h3 id="focus-preferences-heading">Focus Timer Preferences</h3>
+                <p>Set your session lengths, sound feedback and timer notifications.</p>
+            </div>
+            <span class="focus-preferences-chip"><span aria-hidden="true">◷</span> Focus settings</span>
+        </div>
+
+        <div class="focus-preferences-grid">
+            <section class="focus-duration-panel" aria-label="Focus session lengths">
+                <div class="focus-panel-heading">
+                    <strong>Session lengths</strong>
+                    <small>Customize each timer before a session starts.</small>
+                </div>
+                <div class="focus-custom-settings profile-focus-durations">
+                    <div class="focus-duration-fields">
+                        <div class="focus-duration-field">
+                            <label for="focus-custom-minutes">Focus</label>
+                            <div class="focus-duration-input-wrap">
+                                <input type="number" id="focus-custom-minutes" min="1" max="180" step="1" value="25">
+                                <span>min</span>
+                            </div>
+                        </div>
+                        <div class="focus-duration-field">
+                            <label for="focus-short-minutes">Short break</label>
+                            <div class="focus-duration-input-wrap">
+                                <input type="number" id="focus-short-minutes" min="1" max="180" step="1" value="5">
+                                <span>min</span>
+                            </div>
+                        </div>
+                        <div class="focus-duration-field">
+                            <label for="focus-long-minutes">Long break</label>
+                            <div class="focus-duration-input-wrap">
+                                <input type="number" id="focus-long-minutes" min="1" max="180" step="1" value="15">
+                                <span>min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="focus-duration-actions">
+                        <button type="button" class="secondary-btn" id="focus-apply-custom">Save timer lengths</button>
+                        <small class="focus-duration-note">Whole minutes from 1 to 180. Changes apply before a session starts.</small>
+                    </div>
+                </div>
+            </section>
+
+            <section class="focus-behavior-panel" aria-label="Focus timer behavior">
+                <div class="focus-panel-heading">
+                    <strong>Session feedback</strong>
+                    <small>Choose how the app keeps you informed.</small>
+                </div>
+                <div class="settings-toggle-row">
+                    <div>
+                        <strong>Timer sound effects</strong>
+                        <p>Play a quiet tick each second and a completion chime. You can also mute sounds from Focus Mode.</p>
+                    </div>
+                    <label class="settings-switch" for="focus-sounds-enabled"><input type="checkbox" id="focus-sounds-enabled"><span class="settings-switch-track"></span></label>
+                </div>
+                <div class="settings-toggle-row focus-notification-setting-row">
+                    <div>
+                        <strong><span class="focus-notification-symbol" aria-hidden="true">⏱</span> Focus timer notifications</strong>
+                        <p>Keep a timer notification visible while you work in another tab or app. Click it to return to Focus Mode.</p>
+                        <small id="focus-notification-permission-note" class="focus-notification-permission-note">Browser permission is required. Timer notifications update about once per minute while the app is running.</small>
+                    </div>
+                    <label class="settings-switch" for="focus-browser-toggle"><input type="checkbox" id="focus-browser-toggle"><span class="settings-switch-track"></span></label>
+                </div>
+            </section>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+</section>
+
+<section id="overview" class="page-section">
+
+                    <div class="page-heading">
+                        <h2>Dashboard Overview</h2>
+                        <p>Welcome to your personal command center.</p>
+                    </div>
+
+                    <!-- TODAY'S PRODUCTIVITY -->
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <span class="insight-label">Today's Progress</span>
+                            <h3 id="today-progress-label">0 of 0 tasks</h3>
+                            <div class="progress-track"
+                                 role="progressbar"
+                                 aria-label="Today's task completion"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuenow="0"
+                                 id="today-progress-track">
+                                <div class="progress-fill" id="today-progress-fill"></div>
+                            </div>
+                            <p id="today-progress-caption">0% completed today</p>
+                        </div>
+
+                        <div class="insight-card">
+                            <span class="insight-label">Current Streak</span>
+                            <h3><span id="current-streak">0</span> days</h3>
+                            <p>Consecutive days with at least one completed task.</p>
+                        </div>
+
+                        <div class="insight-card">
+                            <span class="insight-label">Completed This Week</span>
+                            <h3 id="weekly-completed-count">0</h3>
+                            <p>Tasks completed in the last seven days.</p>
+                        </div>
+                    </div>
+
+                    <!-- WEEKLY PRODUCTIVITY CHART -->
+                    <div class="analytics-card">
+                        <div class="analytics-card-heading">
+                            <div>
+                                <h3>Weekly Productivity</h3>
+                                <p>Your completed tasks over the last seven days.</p>
+                            </div>
+                        </div>
+                        <div id="weekly-productivity-chart"
+                             class="weekly-chart"
+                             aria-live="polite">
+                            <p class="empty-state">Your weekly activity will appear here.</p>
+                        </div>
+                    </div>
+
+                    <!-- LIVE OVERVIEW PANELS -->
+                    <div class="overview-lower-grid">
+                        <article class="analytics-card overview-panel">
+                            <div class="analytics-card-heading">
+                                <div>
+                                    <h3>Today's Tasks</h3>
+                                    <p id="overview-today-summary">Tasks scheduled for today.</p>
+                                </div>
+                                <a class="overview-text-link" href="#daily-tracker">Open tracker</a>
+                            </div>
+                            <div id="overview-today-tasks" class="overview-task-list" aria-live="polite"></div>
+                        </article>
+
+                        <article class="analytics-card overview-panel">
+                            <div class="analytics-card-heading">
+                                <div>
+                                    <h3>Priority Focus</h3>
+                                    <p>Your most important next actions.</p>
+                                </div>
+                            </div>
+                            <div id="overview-priority-focus" class="overview-focus-list" aria-live="polite"></div>
+                        </article>
+
+                        <article class="analytics-card overview-panel">
+                            <div class="analytics-card-heading">
+                                <div>
+                                    <h3>Discipline Snapshot</h3>
+                                    <p id="overview-habit-summary">Today's habit consistency.</p>
+                                </div>
+                                <a class="overview-text-link" href="#habits">Manage discipline</a>
+                            </div>
+                            <div class="overview-habit-metric">
+                                <strong id="overview-habit-rate">0%</strong>
+                                <span id="overview-habit-count">0 of 0 habits completed</span>
+                            </div>
+                            <div class="overview-mini-track"><span id="overview-habit-fill"></span></div>
+                            <div id="overview-habit-list" class="overview-habit-list" aria-live="polite"></div>
+                        </article>
+
+                        <article class="analytics-card overview-panel">
+                            <div class="analytics-card-heading">
+                                <div>
+                                    <h3>Milestones & Projects</h3>
+                                    <p>Current portfolio health.</p>
+                                </div>
+                            </div>
+                            <div id="overview-portfolio-summary" class="overview-portfolio-grid"></div>
+                            <div id="overview-upcoming-deadlines" class="overview-deadline-list"></div>
+                        </article>
+                    </div>
+
+                    <div class="focus-dashboard-grid">
+                        <article class="analytics-card focus-dashboard-card">
+                            <div class="analytics-card-heading"><div><h3>Focus Timer</h3><p id="dashboard-focus-status">Ready when you are</p></div><a class="overview-text-link" href="#focus-mode">Open Focus Mode</a></div>
+                            <div class="dashboard-focus-row"><strong id="dashboard-focus-time">25:00</strong><button type="button" class="primary-btn" id="dashboard-focus-start">Start focus</button></div>
+                            <div class="focus-mini-track"><span id="dashboard-focus-progress"></span></div>
+                        </article>
+                        <article class="analytics-card daily-quote-card">
+                            <div class="analytics-card-heading"><div><h3>Daily Motivation</h3><p id="daily-quote-category">Discipline</p></div><button type="button" class="secondary-btn" id="focus-quote-refresh">New quote</button></div>
+                            <blockquote id="daily-quote-text">“The secret of getting ahead is getting started.”</blockquote>
+                            <p id="daily-quote-author" class="quote-author">— Mark Twain</p>
+                        </article>
+                    </div>
+
+                </section>
+
+                <!-- FOCUS MODE -->
+                <section id="focus-mode" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">DEEP WORK &amp; RECOVERY</span>
+                        <h2>Focus Mode</h2>
+                        <p>Protect your attention. Work in focused intervals and take deliberate breaks.</p>
+                    </div>
+                    <div class="focus-layout">
+                        <article class="content-card focus-main-card">
+                            <div class="focus-mode-toolbar">
+                                <button type="button" class="focus-settings-shortcut" id="focus-settings-shortcut" aria-label="Open Focus Timer Preferences" title="Focus Timer Settings">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h5m4 0h7M4 12h9m4 0h3M4 18h2m4 0h10"></path><circle cx="11" cy="6" r="2"></circle><circle cx="15" cy="12" r="2"></circle><circle cx="8" cy="18" r="2"></circle></svg>
+                                </button>
+                                <div class="focus-mode-tabs" role="group" aria-label="Timer mode">
+                                    <button type="button" data-focus-mode="focus" class="selected">Focus</button>
+                                    <button type="button" data-focus-mode="short">Short break</button>
+                                    <button type="button" data-focus-mode="long">Long break</button>
+                                </div>
+                                <span class="focus-mode-toolbar-spacer" aria-hidden="true"></span>
+                            </div>
+                            <div class="focus-timer-wrap">
+                                <div class="focus-timer-ring" id="focus-progress-ring"><div><span id="focus-mode-label">Focus session</span><strong id="focus-time">25:00</strong><small>Stay present. One thing at a time.</small></div></div>
+                            </div>
+                            <div class="focus-timer-actions"><button type="button" class="primary-btn" id="focus-start-btn">Start focus</button><button type="button" class="secondary-btn" id="focus-reset-btn">Reset</button><button type="button" class="secondary-btn" id="focus-sound-toggle" aria-pressed="false">Sound: Muted</button></div>
+                            <div class="focus-custom-duration-control" id="focus-custom-duration-control">
+                                <div class="focus-custom-duration-heading">
+                                    <label for="focus-custom-slider">Custom focus duration</label>
+                                    <output id="focus-custom-slider-value" for="focus-custom-slider">Use preset (25 min)</output>
+                                </div>
+                                <input type="range" id="focus-custom-slider" min="0" max="59" step="1" value="0" aria-describedby="focus-custom-slider-help">
+                                <div class="focus-custom-duration-scale"><span>Preset</span><span>59 minutes</span></div>
+                                <small id="focus-custom-slider-help">At 0, the saved Focus timer is used. Slide to 1–59 minutes to activate a custom Focus session. Return to 0 to use the saved timer again.</small>
+                            </div>
+                            <div class="focus-task-select"><label for="focus-linked-task">What are you focusing on?</label><select id="focus-linked-task"><option value="">No linked task</option></select><small id="focus-task-lock-note">Optional. Your selection is saved on this device and locks when a session starts.</small></div>
+                            <article class="focus-history-card">
+                                <div class="focus-history-heading">
+                                    <div>
+                                        <h3>Focus Session History</h3>
+                                        <p>See how much time you have spent on each task.</p>
+                                    </div>
+                                    <button type="button"
+                                            class="secondary-btn focus-history-collapse-btn"
+                                            id="focus-history-toggle"
+                                            aria-controls="focus-history-content"
+                                            aria-expanded="true">
+                                        Collapse history <span aria-hidden="true">▴</span>
+                                    </button>
+                                </div>
+                                <div id="focus-history-content">
+                                    <div id="focus-task-totals" class="focus-task-totals"></div>
+                                    <div id="focus-history-list"><p class="empty-state">No focus sessions recorded yet.</p></div>
+                                </div>
+                            </article>
+                        </article>
+                        <div class="focus-side-column">
+                            <article class="content-card focus-stats-card"><h3>Your Focus Statistics</h3><div class="focus-stat-grid"><div><strong id="focus-session-count">0</strong><span>Completed sessions</span></div><div><strong id="focus-total-time">0h 0m</strong><span>Total focus time</span></div></div><p class="settings-note">Statistics are stored locally in this browser.</p></article>
+                            <article class="content-card focus-notifications-card"><h3>Notifications</h3><div class="settings-toggle-row"><div><strong>In-app notifications</strong><p>Show alerts while the app is open.</p></div><label class="settings-switch" for="focus-inapp-toggle"><input type="checkbox" id="focus-inapp-toggle" checked><span class="settings-switch-track"></span></label></div><small>Focus timer notifications can be enabled in Profile &amp; Appearance. Browser permission is required. The timer continues to run when notifications are off.</small></article>
+                            <article class="content-card focus-quote-card"><span class="section-eyebrow">DAILY REMINDER</span><blockquote id="focus-quote-text">“Small disciplines repeated with consistency every day lead to great achievements.”</blockquote><p>Make today count, one focused session at a time.</p></article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAILY TRACKER -->
+                <section id="daily-tracker"
+                         class="page-section"
+                         hidden>
+
+                    <div class="task-header">
+
+                        <div>
+                            <span class="section-eyebrow">
+                                PERSONAL PRODUCTIVITY
+                            </span>
+
+                            <h2>Daily Task Tracker</h2>
+
+                            <p>
+                                Plan your day. Execute your priorities.
+                                Track your progress.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- TASK STATISTICS -->
+                    <div class="task-stats">
+
+                        <div class="stat-card">
+                            <span class="stat-icon">▤</span>
+                            <h3 id="total-tasks">0</h3>
+                            <p>Total Tasks</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-icon">✓</span>
+                            <h3 id="completed-tasks">0</h3>
+                            <p>Completed</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-icon">◷</span>
+                            <h3 id="pending-tasks">0</h3>
+                            <p>Pending</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <span class="stat-icon">%</span>
+                            <h3 id="completion-rate">0%</h3>
+                            <p>Completion Rate</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- TASK MANAGEMENT -->
+                    <div class="task-workspace">
+
+                        <!-- LEFT COLUMN -->
+                        <div class="task-main-column">
+
+                            <!-- SEARCH AND FILTERS -->
+                            <div class="task-list-card">
+
+                                <div class="task-list-heading">
+                                    <div>
+                                        <h3>Your Tasks</h3>
+                                        <p>
+                                            Manage and organize your daily work.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="task-search">
+
+                                    <span>⌕</span>
+
+                                    <input
+                                        type="search"
+                                        id="task-search"
+                                        placeholder="Search your tasks..."
+                                        autocomplete="off"
+                                    >
+
+                                </div>
+
+
+                                <!-- FILTER BUTTONS -->
+                                <div class="task-filters"
+                                     id="task-filters">
+
+                                    <button
+                                        type="button"
+                                        class="filter-btn active"
+                                        data-filter="all"
+                                        aria-pressed="true"
+                                    >
+                                        All Tasks
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="filter-btn"
+                                        data-filter="today"
+                                        aria-pressed="false"
+                                    >
+                                        Today
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="filter-btn"
+                                        data-filter="upcoming"
+                                        aria-pressed="false"
+                                    >
+                                        Upcoming
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="filter-btn"
+                                        data-filter="pending"
+                                        aria-pressed="false"
+                                    >
+                                        Pending
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="filter-btn"
+                                        data-filter="completed"
+                                        aria-pressed="false"
+                                    >
+                                        Completed
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- OVERDUE TASKS -->
+                            <div class="overdue-card">
+
+                                <div class="overdue-heading">
+                                    <div>
+                                        <span class="overdue-icon">!</span>
+                                        <h3>Overdue Tasks</h3>
+                                    </div>
+
+                                    <span class="overdue-count"
+                                          id="overdue-count">0</span>
+                                </div>
+
+                                <div id="overdue-list">
+                                    <p class="empty-state">
+                                        No overdue tasks.
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+                            <!-- TASK LIST -->
+                            <div class="task-list-card">
+
+                                <div class="task-list-heading">
+                                    <div>
+                                        <h3 id="task-list-title">
+                                            All Tasks
+                                        </h3>
+
+                                        <p id="task-list-subtitle">
+                                            Your complete task list.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="task-list">
+
+                                    <div class="empty-state">
+                                        <span>✓</span>
+                                        <p>
+                                            No tasks yet. Add your first task!
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- RIGHT COLUMN -->
+                        <div class="task-side-column">
+
+                            <!-- ADD TASK FORM -->
+                            <div class="task-form-card">
+
+                                <div class="form-card-heading">
+
+                                    <span class="form-icon">+</span>
+
+                                    <div>
+                                        <h3 id="form-heading">
+                                            Add New Task
+                                        </h3>
+
+                                        <p>
+                                            Create a new task.
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+                                <form id="task-form">
+
+                                    <input
+                                        type="hidden"
+                                        id="task-id"
+                                    >
+
+                                    <div class="task-input-group">
+
+                                        <label for="task-title">
+                                            Task Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="task-title"
+                                            placeholder="What needs to be done?"
+                                            maxlength="120"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="task-input-group">
+
+                                        <label for="task-date">
+                                            Due Date
+                                        </label>
+
+                                        <input
+                                            type="date"
+                                            id="task-date"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="task-input-group">
+
+                                        <label for="task-priority">
+                                            Priority
+                                        </label>
+
+                                        <select id="task-priority">
+
+                                            <option value="High">
+                                                High
+                                            </option>
+
+                                            <option value="Medium" selected>
+                                                Medium
+                                            </option>
+
+                                            <option value="Low">
+                                                Low
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="task-actions">
+
+                                        <button
+                                            type="submit"
+                                            id="save-task-btn"
+                                        >
+                                            Add Task
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            id="cancel-edit-btn"
+                                            hidden
+                                        >
+                                            Cancel
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+
+                            <!-- DATE NAVIGATION -->
+                            <div class="date-card">
+
+                                <h3>Daily Schedule</h3>
+
+                                <p>
+                                    Browse your tasks by date.
+                                </p>
+
+                                <div class="date-navigation">
+
+                                    <button
+                                        type="button"
+                                        id="previous-date"
+                                        aria-label="Previous date"
+                                    >
+                                        ←
+                                    </button>
+
+                                    <input
+                                        type="date"
+                                        id="selected-date"
+                                        aria-label="Select date"
+                                    >
+
+                                    <button
+                                        type="button"
+                                        id="next-date"
+                                        aria-label="Next date"
+                                    >
+                                        →
+                                    </button>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    id="today-date-btn"
+                                    class="today-btn"
+                                >
+                                    Go to Today
+                                </button>
+
+                            </div>
+
+
+                            <!-- PRIORITY LEGEND -->
+                            <div class="priority-card">
+
+                                <h3>Priority Guide</h3>
+
+                                <div class="priority-row">
+                                    <span class="priority-dot high"></span>
+                                    <span>High Priority</span>
+                                </div>
+
+                                <div class="priority-row">
+                                    <span class="priority-dot medium"></span>
+                                    <span>Medium Priority</span>
+                                </div>
+
+                                <div class="priority-row">
+                                    <span class="priority-dot low"></span>
+                                    <span>Low Priority</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- HABITS -->
+                <section id="habits"
+                         class="page-section"
+                         hidden>
+
+                    <div class="page-heading">
+                        <h2>Discipline Builder</h2>
+                        <p>
+                            Build consistency through small daily actions. Track your habits and strengthen your discipline.
+                        </p>
+                    </div>
+
+                    <!-- HABIT DAILY SUMMARY -->
+                    <div class="habit-stats">
+                        <div class="stat-card">
+                            <span class="stat-icon">↻</span>
+                            <h3 id="habit-total-count">0</h3>
+                            <p>Active Habits</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">✓</span>
+                            <h3 id="habit-completed-count">0</h3>
+                            <p>Completed Today</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">%</span>
+                            <h3 id="habit-completion-rate">0%</h3>
+                            <p>Today's Consistency</p>
+                        </div>
+                    </div>
+
+                    <div class="habit-workspace">
+                        <!-- HABIT LIST -->
+                        <div class="habit-main-column">
+                            <div class="habit-panel">
+                                <div class="habit-panel-heading">
+                                    <div>
+                                        <h3>Today's Habits</h3>
+                                        <p>Show up, complete the small actions, and build consistency.</p>
+                                    </div>
+                                    <span id="habit-today-label" class="habit-date-label">Today</span>
+                                </div>
+
+                                <div id="habit-list" class="habit-list" aria-live="polite">
+                                    <p class="empty-state">No habits yet. Add your first habit.</p>
+                                </div>
+                            </div>
+
+                            <div class="habit-panel">
+                                <div class="habit-panel-heading">
+                                    <div>
+                                        <h3>Last Seven Days</h3>
+                                        <p>Select a day to review or update its habit history.</p>
+                                    </div>
+                                </div>
+                                <div id="habit-weekly-summary" class="habit-weekly-summary" aria-live="polite">
+                                    <p class="empty-state">Your weekly consistency will appear here.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADD / EDIT HABIT -->
+                        <aside class="habit-side-column">
+                            <div class="habit-form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-icon">+</span>
+                                    <div>
+                                        <h3 id="habit-form-heading">Add New Habit</h3>
+                                        <p>Create a small action you can repeat daily.</p>
+                                    </div>
+                                </div>
+
+                                <form id="habit-form">
+                                    <input type="hidden" id="habit-id">
+
+                                    <div class="task-input-group">
+                                        <label for="habit-name">Habit Name</label>
+                                        <input type="text" id="habit-name"
+                                               placeholder="e.g. Read for 20 minutes"
+                                               maxlength="80" required>
+                                    </div>
+
+                                    <div class="task-input-group">
+                                        <label for="habit-description">Description (optional)</label>
+                                        <textarea id="habit-description"
+                                                  placeholder="What does success look like?"
+                                                  maxlength="180" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="task-actions">
+                                        <button type="submit" id="save-habit-btn">Add Habit</button>
+                                        <button type="button" id="cancel-habit-edit-btn" hidden>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </aside>
+                    </div>
+
+                </section>
+
+
+                <!-- MILESTONES -->
+                <section id="milestones"
+                         class="page-section"
+                         hidden>
+
+                    <div class="page-heading">
+                        <h2>90-Day Milestones</h2>
+                        <p>
+                            Track your weekly and monthly achievements.
+                        </p>
+                    </div>
+
+                    <!-- MILESTONE SUMMARY -->
+                    <div class="milestone-stats">
+                        <div class="stat-card">
+                            <span class="stat-icon">⚑</span>
+                            <h3 id="milestone-total-count">0</h3>
+                            <p>Total Milestones</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">◷</span>
+                            <h3 id="milestone-active-count">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">✓</span>
+                            <h3 id="milestone-completed-count">0</h3>
+                            <p>Completed</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">!</span>
+                            <h3 id="milestone-overdue-count">0</h3>
+                            <p>Overdue</p>
+                        </div>
+                    </div>
+
+                    <div class="milestone-workspace">
+                        <div class="milestone-main-column">
+                            <div class="milestone-panel">
+                                <div class="milestone-panel-heading">
+                                    <div>
+                                        <h3>Your Milestones</h3>
+                                        <p>Keep your most important outcomes visible.</p>
+                                    </div>
+                                    <span class="milestone-count-label" id="milestone-list-count">0 milestones</span>
+                                </div>
+
+                                <div class="milestone-filters" id="milestone-filters">
+                                    <button type="button" class="milestone-filter-btn active" data-milestone-filter="all" aria-pressed="true">All</button>
+                                    <button type="button" class="milestone-filter-btn" data-milestone-filter="not-started" aria-pressed="false">Not Started</button>
+                                    <button type="button" class="milestone-filter-btn" data-milestone-filter="in-progress" aria-pressed="false">In Progress</button>
+                                    <button type="button" class="milestone-filter-btn" data-milestone-filter="completed" aria-pressed="false">Completed</button>
+                                </div>
+
+                                <div id="milestone-list" class="milestone-list" aria-live="polite">
+                                    <div class="empty-state">
+                                        <span>⚑</span>
+                                        <p>No milestones yet. Add your first milestone.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <aside class="milestone-side-column">
+                            <div class="milestone-form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-icon">+</span>
+                                    <div>
+                                        <h3 id="milestone-form-heading">Add New Milestone</h3>
+                                        <p>Define an outcome and give it a target date.</p>
+                                    </div>
+                                </div>
+
+                                <form id="milestone-form">
+                                    <input type="hidden" id="milestone-id">
+
+                                    <div class="task-input-group">
+                                        <label for="milestone-title">Milestone Title</label>
+                                        <input type="text" id="milestone-title" placeholder="e.g. Launch my first product" maxlength="100" required>
+                                    </div>
+
+                                    <div class="task-input-group">
+                                        <label for="milestone-description">Description</label>
+                                        <textarea id="milestone-description" placeholder="Describe the result you want to achieve..." maxlength="300" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="task-input-group">
+                                        <label for="milestone-target-date">Target Date</label>
+                                        <input type="date" id="milestone-target-date" required>
+                                    </div>
+
+                                    <div class="task-input-group">
+                                        <label for="milestone-status">Status</label>
+                                        <select id="milestone-status">
+                                            <option value="not-started" selected>Not Started</option>
+                                            <option value="in-progress">In Progress</option>
+                                            <option value="completed">Completed</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="task-input-group">
+                                        <label for="milestone-progress">Progress <span id="milestone-progress-value">0%</span></label>
+                                        <input type="range" id="milestone-progress" min="0" max="100" step="5" value="0">
+                                    </div>
+
+                                    <div class="task-actions">
+                                        <button type="submit" id="save-milestone-btn">Add Milestone</button>
+                                        <button type="button" id="cancel-milestone-edit-btn" hidden>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </aside>
+                    </div>
+
+                </section>
+
+
+                <!-- PROJECTS -->
+                <section id="projects"
+                         class="page-section"
+                         hidden>
+
+                    <div class="page-heading">
+                        <h2>Project Management</h2>
+                        <p>Turn important goals into organized projects. Track deadlines, status and execution.</p>
+                    </div>
+
+                    <!-- PROJECT SUMMARY -->
+                    <div class="project-stats">
+                        <div class="stat-card">
+                            <span class="stat-icon">▣</span>
+                            <h3 id="project-total-count">0</h3>
+                            <p>Total Projects</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">◷</span>
+                            <h3 id="project-active-count">0</h3>
+                            <p>In Progress</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">✓</span>
+                            <h3 id="project-completed-count">0</h3>
+                            <p>Completed</p>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-icon">!</span>
+                            <h3 id="project-overdue-count">0</h3>
+                            <p>Overdue</p>
+                        </div>
+                    </div>
+
+                    <div class="project-workspace">
+                        <div class="project-main-column">
+                            <div class="project-panel">
+                                <div class="project-panel-heading">
+                                    <div>
+                                        <h3>Your Projects</h3>
+                                        <p>Keep your active commitments and outcomes in view.</p>
+                                    </div>
+                                    <span class="project-count-label" id="project-list-count">0 projects</span>
+                                </div>
+
+                                <div class="project-filters" id="project-filters">
+                                    <button type="button" class="project-filter-btn active"
+                                            data-project-filter="all" aria-pressed="true">All</button>
+                                    <button type="button" class="project-filter-btn"
+                                            data-project-filter="not-started" aria-pressed="false">Not Started</button>
+                                    <button type="button" class="project-filter-btn"
+                                            data-project-filter="in-progress" aria-pressed="false">In Progress</button>
+                                    <button type="button" class="project-filter-btn"
+                                            data-project-filter="on-hold" aria-pressed="false">On Hold</button>
+                                    <button type="button" class="project-filter-btn"
+                                            data-project-filter="completed" aria-pressed="false">Completed</button>
+                                </div>
+
+                                <div id="project-list" class="project-list" aria-live="polite">
+                                    <div class="empty-state">
+                                        <span>▣</span>
+                                        <p>No projects yet. Add your first project.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <aside class="project-side-column">
+                            <div class="project-form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-icon">+</span>
+                                    <div>
+                                        <h3 id="project-form-heading">Add New Project</h3>
+                                        <p>Define the work and set a realistic deadline.</p>
+                                    </div>
+                                </div>
+
+                                <form id="project-form">
+                                    <input type="hidden" id="project-id">
+
+                                    <div class="project-input-group">
+                                        <label for="project-title">Project Name</label>
+                                        <input type="text" id="project-title"
+                                               placeholder="e.g. Launch GST Infusion website"
+                                               maxlength="100" required>
+                                    </div>
+
+                                    <div class="project-input-group">
+                                        <label for="project-description">Description</label>
+                                        <textarea id="project-description"
+                                                  placeholder="What will this project deliver?"
+                                                  maxlength="500" rows="3"></textarea>
+                                    </div>
+
+                                    <div class="project-date-grid">
+                                        <div class="project-input-group">
+                                            <label for="project-start-date">Start Date</label>
+                                            <input type="date" id="project-start-date" required>
+                                        </div>
+                                        <div class="project-input-group">
+                                            <label for="project-deadline">Deadline</label>
+                                            <input type="date" id="project-deadline" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="project-input-group">
+                                        <label for="project-status">Status</label>
+                                        <select id="project-status">
+                                            <option value="not-started" selected>Not Started</option>
+                                            <option value="in-progress">In Progress</option>
+                                            <option value="on-hold">On Hold</option>
+                                            <option value="completed">Completed</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="project-input-group">
+                                        <label for="project-progress">Progress <span id="project-progress-value">0%</span></label>
+                                        <input type="range" id="project-progress" min="0" max="100" step="5" value="0">
+                                    </div>
+
+                                    <div class="task-actions">
+                                        <button type="submit" id="save-project-btn">Add Project</button>
+                                        <button type="button" id="cancel-project-edit-btn" hidden>Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </aside>
+                    </div>
+
+                </section>
+
+
+                <!-- REPORTS -->
+                <section id="reports"
+                         class="page-section"
+                         hidden>
+
+                    <div class="report-page-heading">
+                        <div class="page-heading">
+                            <span class="section-eyebrow">PERFORMANCE INTELLIGENCE</span>
+                            <h2>Reports &amp; Analytics</h2>
+                            <p>Measure execution, consistency and progress across your 90-day plan.</p>
+                        </div>
+                        <div class="report-toolbar">
+                            <label class="report-period-label" for="report-period">Reporting period</label>
+                            <select id="report-period" class="report-period-select">
+                                <option value="7">Last 7 days</option>
+                                <option value="30" selected>Last 30 days</option>
+                                <option value="90">Last 90 days</option>
+                                <option value="all">All time</option>
+                            </select>
+                            <button type="button" id="export-report-btn" class="report-export-btn">↓ Export Report</button>
+                        </div>
+                    </div>
+
+                    <div class="report-hero-grid">
+                        <article class="report-score-card">
+                            <div class="report-card-topline">
+                                <div>
+                                    <span class="report-kicker">OVERALL PRODUCTIVITY</span>
+                                    <h3>Execution score</h3>
+                                </div>
+                                <span class="report-score-icon">✦</span>
+                            </div>
+                            <div class="report-score-main">
+                                <strong id="report-productivity-score">0%</strong>
+                                <span id="report-score-caption">Your performance snapshot</span>
+                            </div>
+                            <div class="report-score-track"><span id="report-score-fill"></span></div>
+                            <p class="report-score-note">A combined view of task completion and consistency. The score will be calculated from your saved activity.</p>
+                        </article>
+
+                        <article class="report-highlight-card">
+                            <span class="report-highlight-label">TASKS COMPLETED</span>
+                            <strong id="report-total-completed">0</strong>
+                            <p>Completed in selected period</p>
+                            <span class="report-highlight-symbol">✓</span>
+                        </article>
+                        <article class="report-highlight-card">
+                            <span class="report-highlight-label">PENDING TASKS</span>
+                            <strong id="report-total-pending">0</strong>
+                            <p>Still on your task list</p>
+                            <span class="report-highlight-symbol">◷</span>
+                        </article>
+                        <article class="report-highlight-card">
+                            <span class="report-highlight-label">OVERDUE TASKS</span>
+                            <strong id="report-total-overdue">0</strong>
+                            <p>Need your attention</p>
+                            <span class="report-highlight-symbol">!</span>
+                        </article>
+                    </div>
+
+                    <div class="report-section-grid">
+                        <article class="report-panel report-wide-panel">
+                            <div class="report-panel-heading">
+                                <div>
+                                    <h3>Activity Trend</h3>
+                                    <p>Completed tasks over time</p>
+                                </div>
+                                <span class="report-panel-tag">TASKS</span>
+                            </div>
+                            <div id="report-weekly-chart" class="weekly-chart report-activity-chart" aria-live="polite">
+                                <p class="empty-state">Your activity trend will appear here.</p>
+                            </div>
+                        </article>
+
+                        <article class="report-panel">
+                            <div class="report-panel-heading">
+                                <div>
+                                    <h3>Task Completion</h3>
+                                    <p id="report-completion-caption">Completed versus remaining in selected period</p>
+                                </div>
+                            </div>
+                            <div class="report-donut-wrap">
+                                <div class="report-donut" id="report-completion-donut">
+                                    <div><strong id="report-completion-rate">0%</strong><span>complete</span></div>
+                                </div>
+                            </div>
+                            <div class="report-legend">
+                                <span><i class="legend-dot legend-complete"></i> Completed</span>
+                                <span><i class="legend-dot legend-pending"></i> Remaining</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="report-section-grid report-metrics-grid">
+                        <article class="report-panel">
+                            <div class="report-panel-heading">
+                                <div>
+                                    <h3>Habit Consistency</h3>
+                                    <p>Daily habit completion</p>
+                                </div>
+                            </div>
+                            <div class="report-metric-value" id="report-habit-consistency">0%</div>
+                            <div class="report-mini-track"><span id="report-habit-fill"></span></div>
+                            <p class="report-metric-footnote" id="report-habit-caption">Your habit activity will be summarized here.</p>
+                        </article>
+
+                        <article class="report-panel">
+                            <div class="report-panel-heading">
+                                <div>
+                                    <h3>Milestone Progress</h3>
+                                    <p>Important outcomes achieved</p>
+                                </div>
+                            </div>
+                            <div class="report-metric-value" id="report-milestone-rate">0%</div>
+                            <div class="report-mini-track"><span id="report-milestone-fill"></span></div>
+                            <p class="report-metric-footnote" id="report-milestone-caption">Completed milestones out of total milestones.</p>
+                        </article>
+
+                        <article class="report-panel">
+                            <div class="report-panel-heading">
+                                <div>
+                                    <h3>Project Delivery</h3>
+                                    <p>Projects marked completed</p>
+                                </div>
+                            </div>
+                            <div class="report-metric-value" id="report-project-rate">0%</div>
+                            <div class="report-mini-track"><span id="report-project-fill"></span></div>
+                            <p class="report-metric-footnote" id="report-project-caption">Completed projects out of total projects.</p>
+                        </article>
+                    </div>
+
+                    <article class="report-panel report-insight-panel">
+                        <div class="report-panel-heading">
+                            <div>
+                                <h3>Performance Breakdown</h3>
+                                <p>A quick view of the areas that shape your progress.</p>
+                            </div>
+                        </div>
+                        <div class="report-breakdown-list">
+                            <div class="report-breakdown-row"><span>Tasks</span><strong id="report-breakdown-tasks">Awaiting data</strong><div class="report-breakdown-track"><i id="report-breakdown-tasks-fill"></i></div></div>
+                            <div class="report-breakdown-row"><span>Habits</span><strong id="report-breakdown-habits">Awaiting data</strong><div class="report-breakdown-track"><i id="report-breakdown-habits-fill"></i></div></div>
+                            <div class="report-breakdown-row"><span>Milestones</span><strong id="report-breakdown-milestones">Awaiting data</strong><div class="report-breakdown-track"><i id="report-breakdown-milestones-fill"></i></div></div>
+                            <div class="report-breakdown-row"><span>Projects</span><strong id="report-breakdown-projects">Awaiting data</strong><div class="report-breakdown-track"><i id="report-breakdown-projects-fill"></i></div></div>
+                        </div>
+                    </article>
+
+                    <p class="report-disclaimer">Reports are calculated from information saved in this browser. Historical activity is shown only where completion dates have been recorded.</p>
+
+                </section>
+
+                <!-- NOTES & IDEAS -->
+                <section id="notes" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">PERSONAL KNOWLEDGE</span>
+                        <h2>Notes &amp; Ideas</h2>
+                        <p>Capture thoughts, reminders and ideas. Color labels make important notes easy to spot.</p>
+                    </div>
+                    <p id="notes-status" role="status" aria-live="polite"></p>
+                    <div class="notes-layout notes-layout-single">
+                        <article class="content-card notes-list-panel">
+                            <div class="notes-panel-heading">
+                                <div><h3>Your notes</h3><p>Search, filter, read or manage your notes.</p></div>
+                                <div class="notes-heading-actions">
+                                    <span class="notes-count" id="notes-count">0 notes</span>
+                                    <button type="button" class="primary-btn" id="create-note-btn">+ Create note</button>
+                                </div>
+                            </div>
+                            <div class="notes-filters">
+                                <input type="search" id="notes-search" placeholder="Search notes…" aria-label="Search notes">
+                                <select id="notes-filter" aria-label="Filter notes by importance">
+                                    <option value="all">All importance</option>
+                                    <option value="critical">Critical</option>
+                                    <option value="high">High</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div id="notes-list" class="notes-list" aria-live="polite">
+                                <p class="notes-empty">Your saved notes will appear here.</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <dialog id="note-editor-dialog" class="hbt-modal note-editor-dialog" aria-labelledby="note-editor-heading">
+                        <div class="hbt-modal-card">
+                            <div class="hbt-modal-heading">
+                                <div>
+                                    <span class="section-eyebrow">PERSONAL KNOWLEDGE</span>
+                                    <h3 id="note-editor-heading">Create a note</h3>
+                                    <p>Notes are saved in this workspace and included in workspace backups.</p>
+                                </div>
+                                <button type="button" class="secondary-btn hbt-modal-close" id="note-editor-close" aria-label="Close note editor">×</button>
+                            </div>
+                            <form id="note-form">
+                                <input type="hidden" id="note-record-id">
+                                <div class="settings-field">
+                                    <label for="note-title">Title</label>
+                                    <input id="note-title" type="text" maxlength="100" required placeholder="Give your thought a title">
+                                </div>
+                                <div class="settings-field note-editor-field">
+                                    <label id="note-body-label" for="note-body">Your note</label>
+                                    <div class="note-rich-toolbar" id="note-format-toolbar" role="toolbar" aria-label="Note formatting">
+                                        <button type="button" class="secondary-btn" data-note-command="formatBlock" data-note-value="p" aria-label="Paragraph">¶</button>
+                                        <button type="button" class="secondary-btn" data-note-command="formatBlock" data-note-value="h2" aria-label="Heading 2">H2</button>
+                                        <button type="button" class="secondary-btn" data-note-command="formatBlock" data-note-value="h3" aria-label="Heading 3">H3</button>
+                                        <span class="note-toolbar-divider" aria-hidden="true"></span>
+                                        <button type="button" class="secondary-btn" data-note-command="bold" aria-label="Bold"><strong>B</strong></button>
+                                        <button type="button" class="secondary-btn" data-note-command="italic" aria-label="Italic"><em>I</em></button>
+                                        <button type="button" class="secondary-btn" data-note-command="underline" aria-label="Underline"><u>U</u></button>
+                                        <button type="button" class="secondary-btn" data-note-command="insertUnorderedList" aria-label="Bulleted list">• List</button>
+                                        <button type="button" class="secondary-btn" data-note-command="insertOrderedList" aria-label="Numbered list">1. List</button>
+                                        <button type="button" class="secondary-btn" data-note-command="formatBlock" data-note-value="blockquote" aria-label="Quote">Quote</button>
+                                        <button type="button" class="secondary-btn" data-note-command="removeFormat" aria-label="Clear formatting">Clear</button>
+                                    </div>
+                                    <div id="note-body" class="note-rich-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="note-body-label" aria-required="true" data-placeholder="Write your thought, idea, meeting note or reminder..." spellcheck="true"></div>
+                                    <small class="note-editor-hint">Paste formatted text from ChatGPT or another app. Headings, paragraphs, bold, italic, links and lists are preserved.</small>
+                                </div>
+                                <div class="notes-editor-options">
+                                    <div class="settings-field">
+                                        <label for="note-importance">Importance</label>
+                                        <select id="note-importance">
+                                            <option value="normal">Normal — Blue</option>
+                                            <option value="critical">Critical — Red</option>
+                                            <option value="high">High — Orange</option>
+                                            <option value="low">Low — Grey</option>
+                                        </select>
+                                    </div>
+                                    <label class="notes-pin-toggle"><input type="checkbox" id="note-pinned"> <span>Pin this note</span></label>
+                                </div>
+                                <div class="notes-form-actions">
+                                    <button type="button" class="secondary-btn" id="note-cancel-edit">Cancel</button>
+                                    <button type="submit" class="primary-btn" id="note-save-btn">Save note</button>
+                                </div>
+                            </form>
+                        </div>
+                    </dialog>
+
+                    <dialog id="note-reader-dialog" class="hbt-modal note-reader-dialog" aria-labelledby="note-reader-title">
+                        <div class="hbt-modal-card">
+                            <div class="hbt-modal-heading">
+                                <div class="note-reader-heading-copy">
+                                    <span class="section-eyebrow">NOTE DETAILS</span>
+                                    <h3 id="note-reader-title">Note title</h3>
+                                    <div class="note-reader-meta">
+                                        <span id="note-reader-importance" class="note-importance-badge is-normal">Normal</span>
+                                        <span id="note-reader-pinned" class="note-pinned-badge" hidden>Pinned</span>
+                                        <small id="note-reader-date" class="note-date"></small>
+                                    </div>
+                                </div>
+                                <button type="button" class="secondary-btn hbt-modal-close" id="note-reader-close" aria-label="Close note">×</button>
+                            </div>
+                            <div id="note-reader-body" class="note-reader-body"></div>
+                            <div class="notes-form-actions note-reader-actions">
+                                <button type="button" class="secondary-btn" id="note-reader-copy">Copy note</button>
+                                <button type="button" class="secondary-btn" id="note-reader-edit">Edit note</button>
+                                <button type="button" class="primary-btn" id="note-reader-done">Done</button>
+                            </div>
+                        </div>
+                    </dialog>
+                </section>
+
+                <!-- PRIVATE PASSWORD VAULT -->
+                <section id="password-vault" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">PRIVATE CREDENTIALS</span>
+                        <h2>Password Vault</h2>
+                        <p>Store website and app credentials in an encrypted vault. Your vault passphrase is separate from your workspace password.</p>
+                    </div>
+                    <p id="vault-global-status" role="status" aria-live="polite"></p>
+                    <article class="content-card vault-locked-card" id="vault-locked-panel">
+                        <div class="vault-lock-mark" aria-hidden="true">⌑</div>
+                        <div id="vault-create-view" hidden>
+                            <h3>Create your private vault</h3>
+                            <p>Choose a strong vault passphrase. It encrypts your saved credentials on this device using AES-256-GCM.</p>
+                            <form id="vault-create-form" class="vault-auth-form">
+                                <div class="settings-field"><label for="vault-create-password">Vault passphrase</label><input id="vault-create-password" type="password" minlength="12" autocomplete="off" required placeholder="At least 12 characters"></div>
+                                <div class="settings-field"><label for="vault-create-confirm">Confirm passphrase</label><input id="vault-create-confirm" type="password" minlength="12" autocomplete="off" required placeholder="Repeat passphrase"></div>
+                                <button type="submit" class="primary-btn">Create encrypted vault</button>
+                            </form>
+                            <p class="vault-security-note">The passphrase is never saved. If you forget it, saved credentials cannot be decrypted. Keep it in a separate trusted password manager.</p>
+                        </div>
+                        <div id="vault-unlock-view" hidden>
+                            <h3>Unlock your vault</h3>
+                            <p>Your credentials remain encrypted until you enter your vault passphrase.</p>
+                            <form id="vault-unlock-form" class="vault-auth-form vault-auth-single">
+                                <div class="settings-field"><label for="vault-unlock-password">Vault passphrase</label><input id="vault-unlock-password" type="password" autocomplete="off" required placeholder="Enter vault passphrase"></div>
+                                <button type="submit" class="primary-btn">Unlock vault</button>
+                            </form>
+                            <p class="vault-error" id="vault-unlock-error" role="alert" aria-live="assertive"></p>
+                        </div>
+                    </article>
+                    <div id="vault-unlocked-panel" hidden>
+                        <article class="content-card vault-toolbar">
+                            <div><span class="vault-status-dot"></span><strong>Vault unlocked</strong><p>Credentials are decrypted in memory only, auto-lock after 5 minutes of inactivity, and remain encrypted in workspace backups.</p></div>
+                            <button type="button" class="secondary-btn" id="vault-lock-btn">Lock vault</button>
+                        </article>
+                        <div class="vault-layout">
+                            <article class="content-card vault-editor-card">
+                                <div class="notes-panel-heading"><div><h3 id="vault-editor-heading">Add a login</h3><p>Use this for websites, email accounts and apps.</p></div></div>
+                                <form id="vault-entry-form">
+                                    <input type="hidden" id="vault-entry-id">
+                                    <div class="settings-field"><label for="vault-service">Service / website</label><input id="vault-service" type="text" maxlength="100" required placeholder="e.g. Gmail"></div>
+                                    <div class="settings-field"><label for="vault-website">Website URL (optional)</label><input id="vault-website" type="url" maxlength="500" placeholder="https://example.com"></div>
+                                    <div class="settings-field"><label for="vault-username">Username / email</label><input id="vault-username" type="text" maxlength="250" autocomplete="off" required placeholder="Username or email"></div>
+                                    <div class="settings-field"><label for="vault-password">Password</label><div class="vault-password-input"><input id="vault-password" type="password" maxlength="500" autocomplete="off" required placeholder="Enter password"><button type="button" class="secondary-btn" id="vault-password-reveal" aria-pressed="false">Show</button></div></div>
+                                    <div class="settings-field"><label for="vault-entry-notes">Private note (optional)</label><textarea id="vault-entry-notes" rows="2" maxlength="1000" placeholder="Recovery hints or account details (never store OTPs)"></textarea></div>
+                                    <div class="notes-form-actions"><button type="button" class="secondary-btn" id="vault-entry-cancel" hidden>Cancel edit</button><button type="submit" class="primary-btn" id="vault-entry-save">Save encrypted login</button></div>
+                                </form>
+                            </article>
+                            <article class="content-card vault-list-card">
+                                <div class="notes-panel-heading"><div><h3>Saved logins</h3><p>Copy username or password when needed.</p></div><span class="notes-count" id="vault-entry-count">0 logins</span></div>
+                                <input type="search" id="vault-search" class="vault-search" placeholder="Search saved logins…" aria-label="Search saved logins">
+                                <div id="vault-entry-list" class="vault-entry-list" aria-live="polite"><p class="notes-empty">No saved logins yet.</p></div>
+                            </article>
+                        </div>
+                        <article class="content-card vault-change-passphrase-card">
+                            <h3>Change vault passphrase</h3>
+                            <p>Re-encrypts all saved credentials with the new passphrase. Existing backup files remain protected by their original backup recovery passphrase.</p>
+                            <form id="vault-change-passphrase-form" class="vault-change-form">
+                                <div class="settings-field"><label for="vault-new-passphrase">New passphrase</label><input id="vault-new-passphrase" type="password" minlength="12" autocomplete="off" required placeholder="At least 12 characters"></div>
+                                <div class="settings-field"><label for="vault-new-passphrase-confirm">Confirm new passphrase</label><input id="vault-new-passphrase-confirm" type="password" minlength="12" autocomplete="off" required placeholder="Repeat new passphrase"></div>
+                                <button type="submit" class="secondary-btn">Change passphrase</button>
+                            </form>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- BACKUP, RESTORE & PWA INSTALLATION -->
+                <section id="data-tools" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">DATA PROTECTION &amp; DEVICE</span>
+                        <h2>Backup &amp; Install</h2>
+                        <p>Protect your saved workspace and install Habit Builder Tracker as an app.</p>
+                    </div>
+
+                    <article class="content-card auto-backup-settings-card" aria-labelledby="auto-backup-title">
+
+                        <div class="auto-backup-heading">
+                            <div>
+                                <span class="section-eyebrow">DATA PROTECTION</span>
+                                <h3 id="auto-backup-title">Automatic Backup</h3>
+                                <p>Create encrypted backups, sync them through a cloud folder, and recover directly from recent history.</p>
+                            </div>
+                            <span class="auto-backup-badge" id="auto-backup-state-badge">Off</span>
+                        </div>
+
+                        <div class="auto-backup-controls">
+                            <div class="settings-toggle-row auto-backup-enabled-row">
+                                <div><strong>Enable automatic backups</strong><p>Run a backup when this workspace is opened or returns to the foreground, when a backup is due.</p></div>
+                                <label class="settings-switch" for="auto-backup-enabled"><input type="checkbox" id="auto-backup-enabled"><span class="settings-switch-track"></span></label>
+                            </div>
+                            <div class="auto-backup-options-grid">
+                                <div class="settings-field">
+                                    <label for="auto-backup-frequency">Backup frequency</label>
+                                    <select id="auto-backup-frequency"><option value="daily">Daily</option><option value="weekly" selected>Weekly (recommended)</option></select>
+                                </div>
+                                <div class="settings-field">
+                                    <label for="auto-backup-location">Backup location</label>
+                                    <select id="auto-backup-location"><option value="downloads">Browser Downloads</option><option value="folder">Encrypted cloud-synced folder</option></select>
+                                    <small id="auto-backup-folder-label">Default location: your browser's Downloads folder. For cloud sync, choose a Google Drive for desktop or OneDrive synced folder.</small>
+                                </div>
+                            </div>
+                            <div class="auto-backup-actions">
+                                <button type="button" class="secondary-btn" id="auto-backup-choose-folder">Choose folder</button>
+                                <button type="button" class="secondary-btn" id="auto-backup-now">Back up now</button>
+                            </div>
+
+                            <section class="backup-encryption-panel" aria-labelledby="backup-encryption-heading">
+                                <div class="backup-encryption-heading-row">
+                                    <div>
+                                        <span class="section-eyebrow">PRIVATE BY DESIGN</span>
+                                        <h4 id="backup-encryption-heading">Encrypted Cloud Backup &amp; Recovery</h4>
+                                        <p>Encrypt backup files on this device before saving them to a cloud-synced folder.</p>
+                                    </div>
+                                    <span class="auto-backup-badge" id="backup-encryption-state">Not configured</span>
+                                </div>
+                                <div id="backup-encryption-setup" class="backup-encryption-setup">
+                                    <div class="auto-backup-options-grid backup-encryption-fields">
+                                        <div class="settings-field">
+                                            <label for="backup-encryption-passphrase">Backup recovery passphrase</label>
+                                            <input type="password" id="backup-encryption-passphrase" minlength="12" autocomplete="new-password" placeholder="At least 12 characters">
+                                        </div>
+                                        <div class="settings-field">
+                                            <label for="backup-encryption-confirm">Confirm recovery passphrase</label>
+                                            <input type="password" id="backup-encryption-confirm" minlength="12" autocomplete="new-password" placeholder="Repeat passphrase">
+                                        </div>
+                                    </div>
+                                    <div class="backup-encryption-form-actions">
+                                        <button type="button" class="secondary-btn" id="backup-encryption-cancel" hidden>Cancel</button>
+                                        <button type="button" class="primary-btn" id="backup-encryption-enable">Enable AES-256 encryption</button>
+                                    </div>
+                                </div>
+                                <div id="backup-encryption-active" class="backup-encryption-active" hidden>
+                                    <p><strong>Encryption is enabled on this device.</strong> Recent backup entries can be restored without re-entering the passphrase on this browser.</p>
+                                    <button type="button" class="secondary-btn" id="backup-encryption-change">Change recovery passphrase</button>
+                                </div>
+                                <p class="auto-backup-note" id="backup-encryption-note">Set a recovery passphrase before using a cloud-synced folder. Keep it in a password manager. Without it, encrypted backups cannot be recovered on another device.</p>
+                            </section>
+
+                            <p class="auto-backup-status" id="auto-backup-status" role="status" aria-live="polite">Automatic backups are off. Sign-out backups remain enabled.</p>
+                            <p class="auto-backup-note">Cloud-folder workflow: install Google Drive for desktop or OneDrive and select its synced folder here. The app writes AES-256-GCM encrypted files into that folder; the sync client uploads them. This is not a direct Google or Microsoft account connection. Scheduled jobs run when the app opens or returns to the foreground, not while the browser is fully closed. If folder permission is unavailable, the app falls back to Downloads.</p>
+                        </div>
+
+                        <div class="auto-backup-history-section">
+                            <div class="auto-backup-history-heading">
+                                <div><h4>Backup History</h4><p>Latest 20 events. The latest 10 backup files (up to 100 MB total) are cached for one-click restore.</p></div>
+                                <button type="button" class="secondary-btn" id="auto-backup-clear-history">Clear history</button>
+                            </div>
+                            <div id="auto-backup-history" class="auto-backup-history" aria-live="polite">
+                                <p class="auto-backup-empty">No backup activity recorded yet.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="data-tools-grid">
+                        <article class="data-tool-card">
+                            <div class="data-tool-icon" aria-hidden="true">⇧</div>
+                            <div class="data-tool-copy">
+                                <h3>Data Backup &amp; Restore</h3>
+                                <p>Export your profile, notes, encrypted credential vault, tasks, habits, milestones and projects into one portable JSON backup file.</p>
+                            </div>
+                            <div class="data-tool-actions">
+                                <button type="button" class="data-tool-primary" id="backup-download-btn">Download Backup</button>
+                                <button type="button" class="data-tool-secondary" id="backup-restore-btn">Restore from Backup</button>
+                                <input type="file" id="backup-file-input" accept=".json,application/json" hidden>
+                            </div>
+                            <p class="data-tool-note">Restore replaces the current records in this browser. A safety backup is downloaded before the replacement begins.</p>
+                        </article>
+
+                        <article class="data-tool-card">
+                            <div class="data-tool-icon" aria-hidden="true">▣</div>
+                            <div class="data-tool-copy">
+                                <h3>Install Habit Builder Tracker</h3>
+                                <p>Install the workspace on a supported device for an app-like window and offline access to the app shell.</p>
+                            </div>
+                            <div class="data-tool-status" id="pwa-status" role="status" aria-live="polite">Checking installation support…</div>
+                            <div class="data-tool-actions">
+                                <button type="button" class="data-tool-primary" id="pwa-install-btn">Install App</button>
+                            </div>
+                            <p class="data-tool-note" id="pwa-support-note">For installation and offline caching, open this app through localhost or a secure HTTPS address. IndexedDB remains local to this browser.</p>
+                        </article>
+                    </div>
+
+                    <article class="data-tool-guidance">
+                        <h3>Recommended data protection routine</h3>
+                        <p>Download a backup weekly and before moving to another computer or browser. Keep the JSON file somewhere private. Restoring a backup replaces the app's current records with the records in that file.</p>
+                    </article>
+
+                    <article class="data-tool-guidance">
+                        <h3>Use the same workspace on your phone and laptop</h3>
+                        <p>This version stores records locally in each browser. It does not automatically synchronize changes between devices. To transfer your workspace, download a backup on the source device, securely move the JSON file to the other device, then choose Restore from Backup there. Restore replaces the destination device's current records, so download a safety backup on that device first. Avoid editing both devices separately until automatic cloud sync is added.</p>
+                    </article>
+
+                    <article class="content-card workspace-reset-card" aria-labelledby="workspace-reset-title">
+                        <div class="workspace-reset-heading">
+                            <div>
+                                <span class="section-eyebrow">DANGER ZONE</span>
+                                <h3 id="workspace-reset-title">Reset Workspace Data</h3>
+                                <p>Start this workspace fresh by clearing its saved work and personal preferences. A safety backup is prepared first; reset is cancelled if backup creation fails.</p>
+                            </div>
+                            <span class="workspace-reset-icon" aria-hidden="true">!</span>
+                        </div>
+                        <div class="workspace-reset-details-grid">
+                            <div class="workspace-reset-detail is-removed">
+                                <strong>Will be reset</strong>
+                                <ul>
+                                    <li>Personal profile details, avatar, goal and appearance preferences (your display name returns to the workspace name)</li>
+                                    <li>Tasks, habits, milestones and projects</li>
+                                    <li>Notes, ideas and saved Password Vault entries</li>
+                                    <li>Focus timer settings, custom duration and session history</li>
+                                </ul>
+                            </div>
+                            <div class="workspace-reset-detail is-preserved">
+                                <strong>Will be kept</strong>
+                                <ul>
+                                    <li>Workspace name, sign-in identity and a clean dashboard profile</li>
+                                    <li>Workspace password protection</li>
+                                    <li>Automatic backup configuration and backup history</li>
+                                    <li>Existing backup files in Downloads or your selected folder</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="workspace-reset-actions">
+                            <p id="workspace-reset-status" role="status" aria-live="polite">A backup is created before any workspace data is cleared.</p>
+                            <button type="button" class="workspace-reset-button" id="reset-workspace-data-btn">Reset Workspace Data</button>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- ABOUT, COPYRIGHT & CONTACT -->
+                <section id="about-contact" class="page-section" hidden>
+                    <div class="page-heading">
+                        <span class="section-eyebrow">PRODUCT INFORMATION</span>
+                        <h2>About Habit Builder Tracker</h2>
+                        <p>Your personal command center for building habits, protecting focus and tracking meaningful progress.</p>
+                    </div>
+
+                    <div class="about-bento-grid">
+                        <article class="content-card about-brand-card">
+                            <div class="about-brand-topline">
+                                <span class="about-brand-mark" aria-hidden="true">GI</span>
+                                <span class="about-brand-label">GST INFUSION PRESENTS</span>
+                                <span class="about-version-pill">VERSION 1.5.39</span>
+                            </div>
+                            <div class="about-brand-copy">
+                                <h3>Habit Builder Tracker</h3>
+                                <p class="about-brand-tagline">Make consistency visible.</p>
+                                <p>A personal productivity and workspace system designed to help you plan your day, build better routines, focus on important work and review your progress.</p>
+                                <div class="about-badges">
+                                    <span>Offline-first</span><span>Multi-workspace</span><span>Privacy-minded</span>
+                                </div>
+                            </div>
+                            <div class="about-brand-footer">
+                                <span>Designed &amp; created by <strong>Altaf Bhat (Aashu Bhatt)</strong></span>
+                                <span class="about-brand-footer-mark">GST INFUSION</span>
+                            </div>
+                        </article>
+
+                        <article class="content-card about-author-card">
+                            <div class="about-card-eyebrow">AUTHOR &amp; CREATOR</div>
+                            <div class="about-author-heading">
+                                <div class="about-author-avatar" aria-hidden="true">AB</div>
+                                <div><h3>Altaf Bhat</h3><p>Also known as Aashu Bhatt</p></div>
+                            </div>
+                            <p class="about-author-description">Creator of Habit Builder Tracker, built under the GST Infusion identity.</p>
+                            <div class="about-contact-list">
+                                <a href="mailto:gstinfusion@gmail.com" class="about-contact-link">
+                                    <span class="about-contact-icon" aria-hidden="true">✉</span><span><small>BUSINESS EMAIL</small><strong>gstinfusion@gmail.com</strong></span>
+                                </a>
+                                <a href="mailto:aaltafbhat@gmail.com" class="about-contact-link">
+                                    <span class="about-contact-icon" aria-hidden="true">＠</span><span><small>PERSONAL EMAIL</small><strong>aaltafbhat@gmail.com</strong></span>
+                                </a>
+                                <a href="tel:+919796999905" class="about-contact-link">
+                                    <span class="about-contact-icon" aria-hidden="true">☎</span><span><small>PHONE</small><strong>+91 9796999905</strong></span>
+                                </a>
+                            </div>
+                            <div class="about-contact-actions">
+                                <button type="button" class="secondary-btn" id="about-copy-contact">Copy contact details</button>
+                                <a class="primary-btn about-vcard-button" href="assets/gstinfusion-contact.vcf" download="Altaf-Bhat-GST-Infusion.vcf">Save contact</a>
+                            </div>
+                            <p class="about-copy-status" id="about-copy-status" role="status" aria-live="polite"></p>
+                        </article>
+
+                        <article class="content-card about-qr-card">
+                            <div class="about-card-eyebrow">SCAN &amp; CONNECT</div>
+                            <h3>Save this contact</h3>
+                            <p>Scan the QR code with your phone camera to add the author and GST Infusion contact details.</p>
+                            <button type="button" class="about-qr-open" id="about-qr-open" aria-label="Enlarge contact QR code">
+                                <img src="assets/gstinfusion-contact-qr.png" alt="QR code containing the vCard contact details for Altaf Bhat and GST Infusion" width="220" height="220" loading="lazy">
+                            </button>
+                            <span class="about-qr-caption">PHONE · EMAIL · GST INFUSION</span>
+                            <a class="about-qr-download" href="assets/gstinfusion-contact.vcf" download="Altaf-Bhat-GST-Infusion.vcf">Or download the contact card (.vcf)</a>
+                        </article>
+
+                        <section class="about-features-section" aria-labelledby="about-features-title">
+                            <div class="about-section-heading">
+                                <div><span class="section-eyebrow">INSIDE YOUR WORKSPACE</span><h3 id="about-features-title">What you can do</h3><p>Tools included in Habit Builder Tracker.</p></div>
+                                <span class="about-features-count">10 CORE FEATURES</span>
+                            </div>
+                            <div class="about-features-grid">
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">▣</span><h4>Multiple workspaces</h4><p>Create separate workspaces, switch profiles and protect access with passwords.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">✓</span><h4>Tasks &amp; habits</h4><p>Plan daily work, track routines, manage priorities and monitor completion.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">◷</span><h4>Focus Mode</h4><p>Run focused sessions, link tasks, review session history and use timer notifications.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">⚑</span><h4>Milestones &amp; projects</h4><p>Break bigger goals into milestones and organize projects with clear progress.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">▤</span><h4>Reports &amp; insights</h4><p>Review productivity, completion trends, streaks and performance summaries.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">✎</span><h4>Notes &amp; Ideas</h4><p>Capture thoughts with rich-text formatting, importance labels, search and pinning.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">⌑</span><h4>Private Password Vault</h4><p>Keep saved credentials encrypted and reveal or copy them only when needed.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">⇧</span><h4>Backup &amp; recovery</h4><p>Create encrypted backups, review backup history and restore workspace data.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">◈</span><h4>Personalized appearance</h4><p>Choose themes, visual styles, accent colours, animations and dashboard layouts.</p></article>
+                                <article class="content-card about-feature-card"><span class="about-feature-icon">◎</span><h4>Offline-ready app shell</h4><p>Use the installed app shell offline after it has been loaded and cached.</p></article>
+                            </div>
+                        </section>
+
+                        <article class="content-card about-privacy-card">
+                            <div class="about-privacy-icon" aria-hidden="true">⛨</div>
+                            <div><h3>Your workspace. Your data.</h3><p>Workspace records are stored locally in your browser or app storage. Backups are user-managed; encrypted backup and vault features require you to keep their recovery passphrases safe. This app does not provide automatic account-based cloud synchronization.</p></div>
+                        </article>
+
+                        <footer class="about-copyright-card">
+                            <strong>© 2026 GST Infusion. All rights reserved.</strong>
+                            <span>Habit Builder Tracker · A GST Infusion product</span>
+                            <span>Created by Altaf Bhat (Aashu Bhatt)</span>
+                        </footer>
+                    </div>
+
+                    <dialog class="about-qr-dialog" id="about-qr-dialog" aria-labelledby="about-qr-dialog-title">
+                        <div class="about-qr-dialog-inner">
+                            <div class="about-qr-dialog-heading"><div><span class="about-card-eyebrow">GST INFUSION CONTACT</span><h3 id="about-qr-dialog-title">Scan to save contact</h3></div><button type="button" class="secondary-btn" id="about-qr-close" aria-label="Close QR code">×</button></div>
+                            <img src="assets/gstinfusion-contact-qr.png" alt="Large contact QR code for Altaf Bhat (Aashu Bhatt), GST Infusion" width="320" height="320">
+                            <p>Open your phone camera and point it at this QR code.</p>
+                            <a class="primary-btn" href="assets/gstinfusion-contact.vcf" download="Altaf-Bhat-GST-Infusion.vcf">Download contact card</a>
+                        </div>
+                    </dialog>
+                </section>
+
+            </section>
+
+        </main>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            Habit Builder Tracker | Version 1.5.39 — Local Storage Stable
+        </footer>
+
+    </div>
+
+    <!-- SINGLE MOBILE NAVIGATION OVERLAY -->
+    <div class="sidebar-overlay"
+         id="sidebar-overlay"></div>
+
+</div>
+
+
+<!-- JAVASCRIPT MODULES -->
+<script src="js/dialogs.js"></script>
+<script src="js/database.js"></script>
+<script src="js/profile-manager.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/habits.js"></script>
+<script src="js/milestones.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/reports.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/data-tools.js"></script>
+<script src="js/profile-settings.js"></script>
+<script src="js/notes-vault.js"></script>
+<script src="js/focus-mode.js"></script>
+<script src="js/header-notifications.js"></script>
+<script src="js/about.js"></script>
+<script src="js/app.js"></script>
+<script src="js/focus-settings-shortcut.js"></script>
+<script src="js/workspace-reset.js"></script>
+
+</body>
+</html>

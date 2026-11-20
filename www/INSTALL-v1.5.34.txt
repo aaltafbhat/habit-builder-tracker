@@ -1,0 +1,16 @@
+HABIT BUILDER TRACKER v1.5.34 — CROSS-BROWSER WORKSPACE IMPORT
+
+1. Back up the existing project.
+2. Extract the update ZIP into the existing project root.
+3. Replace matching files, preserving the js/ and css/ folder paths.
+4. Ensure js/profile-manager.js and js/data-tools.js are replaced.
+5. Ensure css/workspace-import.css is added.
+6. Restart the app and hard-refresh with Ctrl+Shift+R.
+
+To transfer workspaces between browsers:
+- In the source browser, open Backup & Install and download a workspace backup.
+- Move the .json or .hbtbackup file to a folder accessible from the destination browser (local disk, USB or cloud-synced folder).
+- In the destination browser, sign out, open Workspace Manager, choose Import / Restore workspace, scan the folder or select backup files, then import the workspace.
+- Select the imported workspace from Your Workspaces. If it is password-protected, unlock it with its original workspace password.
+
+IMPORTANT: Browser IndexedDB data is isolated. This feature transfers a backup; it does not synchronize changes between browsers. Do not clear IndexedDB or browser site data during installation.

@@ -1,0 +1,34 @@
+Habit Builder Tracker v1.5.32 — Workspace Reset
+
+UPDATE INSTALLATION
+1. Back up your current Replit project and create a normal workspace backup.
+2. Extract this ZIP into the existing project root.
+3. Replace matching files and keep the folder paths intact.
+4. Restart the Replit app.
+5. Hard-refresh the browser with Ctrl + Shift + R.
+6. Do not clear browser site data or IndexedDB.
+
+NEW RESET WORKFLOW
+Open Backup & Install > Danger Zone > Reset Workspace Data.
+The app first shows a confirmation, then requires typing RESET exactly.
+It attempts to create a safety backup before clearing workspace records.
+If backup creation fails, the reset is cancelled.
+
+RESET SCOPE
+Cleared/reset in the active workspace:
+- Tasks, habits, milestones and projects
+- Notes and Password Vault entries stored in profile data
+- Personal avatar, goal, subtitle and appearance preferences
+- Focus timer preferences, custom duration and Focus Session history
+
+Preserved:
+- Workspace account identity and workspace name
+- Workspace password protection and registry record
+- Backup configuration, backup history and previously created backup files
+
+The profile display name is reset to the workspace name so the app returns to the dashboard.
+The action affects only the active workspace.
+
+BACKUP NOTE
+Browser downloads and selected-folder writes are controlled by browser permissions.
+After the reset starts, confirm the safety backup exists at the destination shown by the app.

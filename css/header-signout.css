@@ -1,0 +1,49 @@
+/* v1.5.33 — Header sign-out visibility and placement */
+.header-profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+.header-profile-primary-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.header-signout-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  margin: 0 2px 0 0;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--danger, #d94b55);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+.header-signout-link:hover {
+  background: var(--danger-light, rgba(217, 75, 85, .09));
+  color: var(--danger, #d94b55);
+  border-color: color-mix(in srgb, var(--danger, #d94b55) 18%, transparent);
+}
+.header-signout-link:focus-visible {
+  outline: 2px solid var(--primary, #6553e8);
+  outline-offset: 2px;
+}
+#sidebar-signout-btn[hidden] { display: none !important; }
+@media (max-width: 480px) {
+  .header-profile-primary-actions { gap: 6px; }
+  .header-signout-link { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-signout-link { transition: none; }
+}

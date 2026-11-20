@@ -1,0 +1,9 @@
+HABIT BUILDER TRACKER v1.5.33 UPDATE
+
+1. Back up your existing project.
+2. Extract this ZIP into the existing project root, preserving folders.
+3. Replace matching files and add css/header-signout.css.
+4. Restart the app and hard-refresh with Ctrl + Shift + R.
+5. Do not clear IndexedDB or browser site data.
+
+The header Sign out action appears beneath Appearance while a workspace is signed in. It uses the same confirmation, Focus Mode stop, automatic backup and lock workflow as Workspace Manager.

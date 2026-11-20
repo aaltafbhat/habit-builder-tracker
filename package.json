@@ -1,0 +1,55 @@
+{
+  "name": "habit-builder-tracker",
+  "version": "1.5.39",
+  "private": true,
+  "description": "Local-first, offline-capable Habit Builder Tracker with per-profile IndexedDB storage, encryption and portable backups",
+  "author": "GST Infusion",
+  "license": "UNLICENSED",
+  "scripts": {
+    "copy:web": "node packaging/scripts/copy-web.mjs",
+    "desktop:dev": "npm run copy:web && electron .",
+    "desktop:win": "npm run copy:web && electron-builder --win nsis",
+    "android:init": "npm run copy:web && cap add android",
+    "android:sync": "npm run copy:web && cap sync android",
+    "android:open": "cap open android",
+    "android:debug": "npm run android:sync && cap run android",
+    "android:release": "npm run android:sync && cap open android",
+    "test": "node tests/local-storage-smoke.cjs && npm run copy:web && node tests/pwa-shell-smoke.cjs && node tests/electron-local-storage-smoke.cjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3",
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.gstinfusion.habitbuilder",
+    "productName": "Habit Builder Tracker",
+    "directories": {
+      "output": "dist/windows"
+    },
+    "files": [
+      "www/**/*",
+      "packaging/electron/**/*",
+      "package.json",
+      "icons/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icons/app.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Habit Builder Tracker"
+    }
+  },
+  "main": "packaging/electron/main.cjs"
+}

@@ -1,0 +1,22 @@
+HABIT BUILDER TRACKER v1.5.39 — LOCAL STORAGE STABLE
+
+RECOMMENDED INSTALL
+1. Export a backup from each existing workspace before upgrading.
+2. Close the running app/browser tab.
+3. Extract this complete package into a new project folder (or replace application source files in your existing project).
+4. Run: npm install
+5. Run: npm test
+6. Windows desktop: npm run desktop:dev
+7. Windows installer build: npm run desktop:win (on Windows)
+8. Browser/PWA: serve the project on HTTPS or localhost.
+
+LOCAL DATA SAFETY
+- Existing workspace data remains in browser/desktop IndexedDB.
+- Do NOT clear browser site data, IndexedDB, or Electron application data.
+- Profile passwords and encryption are unchanged.
+- Backup/restore remains available in Backup & Install.
+
+CROSS-DEVICE TRANSFER
+Each browser and desktop installation has its own local IndexedDB. To move a workspace, export a backup from the source and import it as a new local profile on the destination. Automatic sync and shared-folder storage are intentionally not included in this stable release.
+
+See README.md and release-docs/ for full details.
